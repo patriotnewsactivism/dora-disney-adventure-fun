@@ -16,6 +16,12 @@ import cakepop1Img from "@/assets/cakepop-hunter1.png";
 import cakepop2Img from "@/assets/cakepop-hunter2.png";
 import cakepop3Img from "@/assets/cakepop-hunter3.png";
 import cakepop4Img from "@/assets/cakepop-hunter4.png";
+import bluesImg from "@/assets/blues.png";
+import annaImg from "@/assets/anna.png";
+import arielImg from "@/assets/ariel.png";
+import belleImg from "@/assets/belle.png";
+import rapunzelImg from "@/assets/rapunzel.png";
+import buzzImg from "@/assets/buzz.png";
 
 interface Card {
   id: string;
@@ -35,6 +41,12 @@ const allCharacters = [
   { name: "Cake Pop Warrior", image: cakepop2Img },
   { name: "Cake Pop Hero", image: cakepop3Img },
   { name: "Cake Pop Adventurer", image: cakepop4Img },
+  { name: "Blues Clues", image: bluesImg },
+  { name: "Anna", image: annaImg },
+  { name: "Ariel", image: arielImg },
+  { name: "Belle", image: belleImg },
+  { name: "Rapunzel", image: rapunzelImg },
+  { name: "Buzz Lightyear", image: buzzImg },
 ];
 
 // Round configurations - each round gets progressively harder
@@ -186,13 +198,10 @@ const MemoryGame = () => {
   const isRoundComplete = matchedPairs === currentPairsNeeded && matchedPairs > 0;
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-8">
+    <div className="w-full max-w-4xl mx-auto">
       {showConfetti && <Confetti />}
 
       <div className="mb-8 text-center">
-        <h1 className="text-5xl md:text-6xl mb-4 text-primary">
-          Memory Match! 🎮
-        </h1>
         <p className="text-2xl text-muted-foreground mb-6">
           Find all the matching character pairs!
         </p>

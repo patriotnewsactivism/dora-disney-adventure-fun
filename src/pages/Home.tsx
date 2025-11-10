@@ -1,0 +1,87 @@
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Brain, Grid3x3, Pencil, CircleDot, Palette } from "lucide-react";
+
+const Home = () => {
+  const games = [
+    {
+      id: "memory",
+      title: "Memory Match",
+      description: "Find matching character pairs!",
+      icon: Brain,
+      path: "/memory",
+      color: "bg-gradient-to-br from-pink-400 to-purple-500",
+    },
+    {
+      id: "tictactoe",
+      title: "Tic-Tac-Toe",
+      description: "Play with Disney characters!",
+      icon: Grid3x3,
+      path: "/tictactoe",
+      color: "bg-gradient-to-br from-blue-400 to-cyan-500",
+    },
+    {
+      id: "hangman",
+      title: "Hangman",
+      description: "Guess the Disney words!",
+      icon: Pencil,
+      path: "/hangman",
+      color: "bg-gradient-to-br from-green-400 to-emerald-500",
+    },
+    {
+      id: "checkers",
+      title: "Checkers",
+      description: "Classic checkers game!",
+      icon: CircleDot,
+      path: "/checkers",
+      color: "bg-gradient-to-br from-red-400 to-orange-500",
+    },
+    {
+      id: "coloring",
+      title: "Color by Number",
+      description: "Create beautiful art!",
+      icon: Palette,
+      path: "/coloring",
+      color: "bg-gradient-to-br from-yellow-400 to-amber-500",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background">
+      <div className="container mx-auto px-4 py-8">
+        <div className="text-center mb-12">
+          <h1 className="text-6xl md:text-7xl font-bold mb-4 text-primary animate-bounce">
+            🎮 Disney Games Hub! 🎮
+          </h1>
+          <p className="text-2xl text-muted-foreground">
+            Choose your favorite game to play!
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {games.map((game) => {
+            const Icon = game.icon;
+            return (
+              <Link key={game.id} to={game.path}>
+                <Card className="p-6 hover:scale-105 transition-transform duration-300 cursor-pointer border-4 border-border hover:shadow-2xl">
+                  <div className={`${game.color} rounded-2xl p-8 mb-4 flex items-center justify-center`}>
+                    <Icon className="h-20 w-20 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-center mb-2 text-foreground">
+                    {game.title}
+                  </h2>
+                  <p className="text-lg text-center text-muted-foreground">
+                    {game.description}
+                  </p>
+                </Card>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
