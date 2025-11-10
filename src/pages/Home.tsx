@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Brain, Grid3x3, Pencil, CircleDot, Palette } from "lucide-react";
+import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle } from "lucide-react";
 
 const Home = () => {
   const games = [
@@ -44,6 +44,14 @@ const Home = () => {
       icon: Palette,
       path: "/coloring",
       color: "bg-gradient-to-br from-yellow-400 to-amber-500",
+    },
+    {
+      id: "aichat",
+      title: "Disney AI Friend",
+      description: "Chat with your AI buddy!",
+      icon: MessageCircle,
+      path: "/aichat",
+      color: "bg-gradient-to-br from-purple-400 to-pink-500",
     },
   ];
 

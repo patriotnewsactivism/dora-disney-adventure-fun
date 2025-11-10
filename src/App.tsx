@@ -9,6 +9,7 @@ import TicTacToe from "./pages/TicTacToe";
 import Hangman from "./pages/Hangman";
 import Checkers from "./pages/Checkers";
 import ColorByNumber from "./pages/ColorByNumber";
+import AIChat from "./pages/AIChat";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/hangman" element={<Hangman />} />
           <Route path="/checkers" element={<Checkers />} />
           <Route path="/coloring" element={<ColorByNumber />} />
+          <Route path="/aichat" element={<AIChat />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,0 +1,4 @@
+project_id = "qlfkjfcgjlavpxjwcvmc"
+
+[functions.kids-chat]
+verify_jwt = false
