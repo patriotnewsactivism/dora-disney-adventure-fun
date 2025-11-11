@@ -14,7 +14,65 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      game_progress: {
+        Row: {
+          completed_at: string | null
+          game_type: string
+          id: string
+          metadata: Json | null
+          profile_id: string | null
+          score: number | null
+        }
+        Insert: {
+          completed_at?: string | null
+          game_type: string
+          id?: string
+          metadata?: Json | null
+          profile_id?: string | null
+          score?: number | null
+        }
+        Update: {
+          completed_at?: string | null
+          game_type?: string
+          id?: string
+          metadata?: Json | null
+          profile_id?: string | null
+          score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "game_progress_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          age: number
+          avatar_url: string | null
+          created_at: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          age: number
+          avatar_url?: string | null
+          created_at?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          age?: number
+          avatar_url?: string | null
+          created_at?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
