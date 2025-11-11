@@ -6,7 +6,7 @@ import Confetti from "@/components/Confetti";
 import { cn } from "@/lib/utils";
 
 const MonsterTruckRacing = () => {
-  const [truck Position, setTruckPosition] = useState(0);
+  const [truckPosition, setTruckPosition] = useState(0);
   const [raceProgress, setRaceProgress] = useState(0);
   const [isRacing, setIsRacing] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
