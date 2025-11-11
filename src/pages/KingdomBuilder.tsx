@@ -1,18 +1,61 @@
-import ComingSoon from "./ComingSoon";
+import { useState } from "react";
+import GameLayout from "@/components/GameLayout";
+import { Button } from "@/components/ui/button";
+import Confetti from "@/components/Confetti";
 
 const KingdomBuilder = () => {
+  const buildings = [
+    { id: "castle", emoji: "🏰", name: "Castle", points: 10 },
+    { id: "house", emoji: "🏠", name: "House", points: 5 },
+    { id: "tree", emoji: "🌳", name: "Tree", points: 3 },
+    { id: "fountain", emoji: "⛲", name: "Fountain", points: 7 },
+  ];
+
+  const [placed, setPlaced] = useState<string[]>([]);
+  const [points, setPoints] = useState(0);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  const placeBuilding = (building: typeof buildings[0]) => {
+    setPlaced([...placed, building.emoji]);
+    setPoints(prev => prev + building.points);
+    if ((points + building.points) % 50 === 0) {
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 2000);
+    }
+  };
+
   return (
-    <ComingSoon
-      title="My Own Kingdom Builder! 🏰"
-      description="Design kingdoms and earn points for kindness and bravery!"
-      features={[
-        "Build your dream kingdom",
-        "Place castles, gardens, and villages",
-        "Complete kindness quests",
-        "Earn bravery points",
-        "Unlock new buildings and decorations"
-      ]}
-    />
+    <GameLayout title="Kingdom Builder! 🏰">
+      {showConfetti && <Confetti />}
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-6">
+          <h2 className="text-3xl font-bold">Build Your Kingdom!</h2>
+          <p className="text-2xl">Points: {points}</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-200 to-blue-200 rounded-3xl p-8 min-h-[400px] mb-6 border-4 border-green-400">
+          <div className="flex flex-wrap gap-4 text-6xl">
+            {placed.map((emoji, i) => (
+              <span key={i} className="animate-bounce">{emoji}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-4 gap-4">
+          {buildings.map(building => (
+            <button
+              key={building.id}
+              onClick={() => placeBuilding(building)}
+              className="p-6 bg-white rounded-2xl border-4 border-purple-300 hover:scale-105 transition-all"
+            >
+              <div className="text-6xl mb-2">{building.emoji}</div>
+              <p className="font-bold">{building.name}</p>
+              <p className="text-sm">{building.points} pts</p>
+            </button>
+          ))}
+        </div>
+      </div>
+    </GameLayout>
   );
 };
 
