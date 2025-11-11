@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle } from "lucide-react";
+import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle, User } from "lucide-react";
+import { useProfile } from "@/contexts/ProfileContext";
 
 const Home = () => {
-  const games = [
+  const { currentProfile } = useProfile();
+  
+  const allGames = [
     {
       id: "memory",
       title: "Memory Match",
@@ -12,6 +15,7 @@ const Home = () => {
       icon: Brain,
       path: "/memory",
       color: "bg-gradient-to-br from-pink-400 to-purple-500",
+      minAge: 4,
     },
     {
       id: "tictactoe",
@@ -20,6 +24,7 @@ const Home = () => {
       icon: Grid3x3,
       path: "/tictactoe",
       color: "bg-gradient-to-br from-blue-400 to-cyan-500",
+      minAge: 5,
     },
     {
       id: "hangman",
@@ -28,6 +33,7 @@ const Home = () => {
       icon: Pencil,
       path: "/hangman",
       color: "bg-gradient-to-br from-green-400 to-emerald-500",
+      minAge: 6,
     },
     {
       id: "checkers",
@@ -36,6 +42,7 @@ const Home = () => {
       icon: CircleDot,
       path: "/checkers",
       color: "bg-gradient-to-br from-red-400 to-orange-500",
+      minAge: 6,
     },
     {
       id: "coloring",
@@ -44,6 +51,7 @@ const Home = () => {
       icon: Palette,
       path: "/coloring",
       color: "bg-gradient-to-br from-yellow-400 to-amber-500",
+      minAge: 3,
     },
     {
       id: "aichat",
@@ -52,19 +60,38 @@ const Home = () => {
       icon: MessageCircle,
       path: "/aichat",
       color: "bg-gradient-to-br from-purple-400 to-pink-500",
+      minAge: 3,
     },
   ];
+
+  // Filter games based on current profile age
+  const games = currentProfile 
+    ? allGames.filter(game => currentProfile.age >= game.minAge)
+    : allGames;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background">
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12">
-          <h1 className="text-6xl md:text-7xl font-bold mb-4 text-primary animate-bounce">
-            🎮 Disney Games Hub! 🎮
-          </h1>
-          <p className="text-2xl text-muted-foreground">
-            Choose your favorite game to play!
-          </p>
+        <div className="flex justify-between items-center mb-8">
+          <div className="text-center flex-1">
+            <h1 className="text-6xl md:text-7xl font-bold mb-4 text-primary animate-bounce">
+              🎮 Disney Games Hub! 🎮
+            </h1>
+            {currentProfile && (
+              <p className="text-2xl text-muted-foreground">
+                Welcome back, {currentProfile.name}! 🌟
+              </p>
+            )}
+            <p className="text-xl text-muted-foreground">
+              Choose your favorite game to play!
+            </p>
+          </div>
+          <Link to="/">
+            <Button size="lg" variant="outline" className="text-lg">
+              <User className="mr-2 h-5 w-5" />
+              Switch Player
+            </Button>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

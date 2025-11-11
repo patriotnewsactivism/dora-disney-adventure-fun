@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ProfileProvider } from "./contexts/ProfileContext";
+import ProfileSelect from "./pages/ProfileSelect";
 import Home from "./pages/Home";
 import Memory from "./pages/Memory";
 import TicTacToe from "./pages/TicTacToe";
@@ -20,17 +22,20 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/memory" element={<Memory />} />
-          <Route path="/tictactoe" element={<TicTacToe />} />
-          <Route path="/hangman" element={<Hangman />} />
-          <Route path="/checkers" element={<Checkers />} />
-          <Route path="/coloring" element={<ColorByNumber />} />
-          <Route path="/aichat" element={<AIChat />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ProfileProvider>
+          <Routes>
+            <Route path="/" element={<ProfileSelect />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/memory" element={<Memory />} />
+            <Route path="/tictactoe" element={<TicTacToe />} />
+            <Route path="/hangman" element={<Hangman />} />
+            <Route path="/checkers" element={<Checkers />} />
+            <Route path="/coloring" element={<ColorByNumber />} />
+            <Route path="/aichat" element={<AIChat />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ProfileProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

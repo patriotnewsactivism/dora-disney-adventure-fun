@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Mic, MicOff, Send, Volume2, Home } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AudioRecorder } from "@/utils/audioRecorder";
+import { supabase } from "@/integrations/supabase/client";
 import mickeyImg from "@/assets/mickey.png";
 
 interface Message {
@@ -148,17 +149,35 @@ const AIChat = () => {
       const audioBlob = await audioRecorderRef.current.stop();
       setIsRecording(false);
 
-      // Convert to base64 and send
+      toast({
+        title: "🎤 Processing...",
+        description: "Converting your voice to text...",
+      });
+
+      // Convert to base64 and send to speech-to-text
       const reader = new FileReader();
       reader.onloadend = async () => {
         const base64Audio = reader.result as string;
         const base64Data = base64Audio.split(',')[1];
 
-        // For now, just show placeholder - in production you'd use speech-to-text
-        toast({
-          title: "Voice feature coming soon!",
-          description: "For now, please type your message 😊",
-        });
+        try {
+          const { data, error } = await supabase.functions.invoke('speech-to-text', {
+            body: { audio: base64Data }
+          });
+
+          if (error) throw error;
+
+          if (data?.text) {
+            await sendMessage(data.text);
+          }
+        } catch (error) {
+          console.error('Speech-to-text error:', error);
+          toast({
+            title: "Voice Error",
+            description: "Couldn't understand that. Please try again!",
+            variant: "destructive",
+          });
+        }
       };
       reader.readAsDataURL(audioBlob);
     } catch (error) {
