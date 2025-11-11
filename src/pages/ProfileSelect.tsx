@@ -1,16 +1,97 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useProfile } from "@/contexts/ProfileContext";
-import { User } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { Plus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+// Import all Disney character images
+import doraImg from "@/assets/dora.png";
+import mickeyImg from "@/assets/mickey.png";
+import minnieImg from "@/assets/minnie.png";
+import elsaImg from "@/assets/elsa.png";
+import simbaImg from "@/assets/simba.png";
+import moanaImg from "@/assets/moana.png";
+import annaImg from "@/assets/anna.png";
+import arielImg from "@/assets/ariel.png";
+import belleImg from "@/assets/belle.png";
+import rapunzelImg from "@/assets/rapunzel.png";
+import buzzImg from "@/assets/buzz.png";
+import bluesImg from "@/assets/blues.png";
+
+const disneyCharacters = [
+  { name: "Mickey", image: mickeyImg },
+  { name: "Minnie", image: minnieImg },
+  { name: "Elsa", image: elsaImg },
+  { name: "Anna", image: annaImg },
+  { name: "Ariel", image: arielImg },
+  { name: "Belle", image: belleImg },
+  { name: "Rapunzel", image: rapunzelImg },
+  { name: "Moana", image: moanaImg },
+  { name: "Simba", image: simbaImg },
+  { name: "Buzz", image: buzzImg },
+  { name: "Dora", image: doraImg },
+  { name: "Blue", image: bluesImg },
+];
 
 const ProfileSelect = () => {
   const navigate = useNavigate();
-  const { profiles, setCurrentProfile } = useProfile();
+  const { profiles, setCurrentProfile, loadProfiles } = useProfile();
+  const { toast } = useToast();
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [newProfileName, setNewProfileName] = useState("");
+  const [newProfileAge, setNewProfileAge] = useState("");
+  const [selectedCharacter, setSelectedCharacter] = useState("");
 
   const handleProfileSelect = (profile: any) => {
     setCurrentProfile(profile);
     navigate('/home');
+  };
+
+  const handleCreateProfile = async () => {
+    if (!newProfileName || !newProfileAge || !selectedCharacter) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all fields and select a character!",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('profiles')
+        .insert({
+          name: newProfileName,
+          age: parseInt(newProfileAge),
+          avatar_url: selectedCharacter,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Profile Created!",
+        description: `Welcome, ${newProfileName}!`,
+      });
+
+      await loadProfiles();
+      setShowCreateDialog(false);
+      setNewProfileName("");
+      setNewProfileAge("");
+      setSelectedCharacter("");
+    } catch (error) {
+      console.error('Error creating profile:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create profile. Please try again!",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -18,10 +99,10 @@ const ProfileSelect = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-12">
           <h1 className="text-6xl md:text-7xl font-bold mb-4 text-primary animate-bounce">
-            🌟 Who's Playing? 🌟
+            ✨ Who's Playing? ✨
           </h1>
           <p className="text-2xl text-muted-foreground">
-            Choose your profile to start!
+            Choose your profile to start the fun!
           </p>
         </div>
 
@@ -33,17 +114,11 @@ const ProfileSelect = () => {
               className="p-6 hover:scale-105 transition-transform duration-300 cursor-pointer border-4 border-border hover:shadow-2xl"
             >
               <div className="flex flex-col items-center gap-4">
-                {profile.avatar_url ? (
-                  <img
-                    src={profile.avatar_url}
-                    alt={profile.name}
-                    className="w-32 h-32 rounded-full object-cover border-4 border-primary"
-                  />
-                ) : (
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center border-4 border-primary">
-                    <User className="w-16 h-16 text-white" />
-                  </div>
-                )}
+                <img
+                  src={profile.avatar_url || mickeyImg}
+                  alt={profile.name}
+                  className="w-32 h-32 rounded-full object-cover border-4 border-primary"
+                />
                 <div className="text-center">
                   <h2 className="text-2xl font-bold text-foreground">{profile.name}</h2>
                   <p className="text-lg text-muted-foreground">Age {profile.age}</p>
@@ -51,17 +126,99 @@ const ProfileSelect = () => {
               </div>
             </Card>
           ))}
+
+          <Card
+            onClick={() => setShowCreateDialog(true)}
+            className="p-6 hover:scale-105 transition-transform duration-300 cursor-pointer border-4 border-dashed border-primary hover:shadow-2xl bg-gradient-to-br from-primary/10 to-secondary/10"
+          >
+            <div className="flex flex-col items-center gap-4 justify-center h-full">
+              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center border-4 border-primary">
+                <Plus className="w-16 h-16 text-white" />
+              </div>
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-foreground">Add Player</h2>
+                <p className="text-lg text-muted-foreground">Create New</p>
+              </div>
+            </div>
+          </Card>
         </div>
 
         {profiles.length === 0 && (
           <div className="text-center mt-8">
-            <p className="text-xl text-muted-foreground mb-4">No profiles yet! Ask a parent to add you.</p>
-            <Button onClick={() => navigate('/home')} size="lg">
+            <Button onClick={() => navigate('/home')} size="lg" variant="outline">
               Continue as Guest
             </Button>
           </div>
         )}
       </div>
+
+      <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
+        <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-3xl text-center">Create Your Profile! 🌟</DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-6">
+            <div>
+              <Label htmlFor="name" className="text-xl">What's your name?</Label>
+              <Input
+                id="name"
+                value={newProfileName}
+                onChange={(e) => setNewProfileName(e.target.value)}
+                placeholder="Enter your name"
+                className="text-lg mt-2"
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="age" className="text-xl">How old are you?</Label>
+              <Input
+                id="age"
+                type="number"
+                value={newProfileAge}
+                onChange={(e) => setNewProfileAge(e.target.value)}
+                placeholder="Enter your age"
+                className="text-lg mt-2"
+                min="1"
+                max="100"
+              />
+            </div>
+
+            <div>
+              <Label className="text-xl">Choose your character!</Label>
+              <div className="grid grid-cols-3 md:grid-cols-4 gap-4 mt-4">
+                {disneyCharacters.map((char) => (
+                  <Card
+                    key={char.name}
+                    onClick={() => setSelectedCharacter(char.image)}
+                    className={`p-3 cursor-pointer transition-all duration-200 ${
+                      selectedCharacter === char.image
+                        ? "border-4 border-primary shadow-lg scale-110"
+                        : "border-2 border-border hover:scale-105"
+                    }`}
+                  >
+                    <img
+                      src={char.image}
+                      alt={char.name}
+                      className="w-full h-24 object-contain mb-2"
+                    />
+                    <p className="text-center font-semibold text-sm">{char.name}</p>
+                  </Card>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-4 justify-end">
+              <Button variant="outline" onClick={() => setShowCreateDialog(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleCreateProfile} size="lg">
+                Create Profile!
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
