@@ -48,6 +48,14 @@ const ProfileSelect = () => {
   const [newProfileAge, setNewProfileAge] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState("");
 
+  // Default profiles for the kids
+  const defaultProfiles = [
+    { id: "emme", name: "Emme", age: 5, avatar_url: elsaImg },
+    { id: "anna-claire", name: "Anna-Claire", age: 8, avatar_url: annaImg },
+    { id: "mckenna", name: "Mckenna", age: 11, avatar_url: arielImg },
+    { id: "ethan", name: "Ethan", age: 3, avatar_url: mickeyImg },
+  ];
+
   const handleProfileSelect = (profile: any) => {
     setCurrentProfile(profile);
     navigate('/home');
@@ -106,16 +114,17 @@ const ProfileSelect = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-          {profiles.map((profile) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {/* Show default profiles for the kids */}
+          {defaultProfiles.map((profile) => (
             <Card
               key={profile.id}
               onClick={() => handleProfileSelect(profile)}
-              className="p-6 hover:scale-105 transition-transform duration-300 cursor-pointer border-4 border-border hover:shadow-2xl"
+              className="p-6 hover:scale-105 transition-transform duration-300 cursor-pointer border-4 border-primary hover:shadow-2xl bg-white"
             >
               <div className="flex flex-col items-center gap-4">
                 <img
-                  src={profile.avatar_url || mickeyImg}
+                  src={profile.avatar_url}
                   alt={profile.name}
                   className="w-32 h-32 rounded-full object-cover border-4 border-primary"
                 />
@@ -126,28 +135,35 @@ const ProfileSelect = () => {
               </div>
             </Card>
           ))}
-
-          <Card
-            onClick={() => setShowCreateDialog(true)}
-            className="p-6 hover:scale-105 transition-transform duration-300 cursor-pointer border-4 border-dashed border-primary hover:shadow-2xl bg-gradient-to-br from-primary/10 to-secondary/10"
-          >
-            <div className="flex flex-col items-center gap-4 justify-center h-full">
-              <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center border-4 border-primary">
-                <Plus className="w-16 h-16 text-white" />
-              </div>
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-foreground">Add Player</h2>
-                <p className="text-lg text-muted-foreground">Create New</p>
-              </div>
-            </div>
-          </Card>
         </div>
 
-        {profiles.length === 0 && (
-          <div className="text-center mt-8">
-            <Button onClick={() => navigate('/home')} size="lg" variant="outline">
-              Continue as Guest
-            </Button>
+        {/* Show database profiles if any exist */}
+        {profiles.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-3xl font-bold text-center mb-6 text-muted-foreground">
+              Other Players
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {profiles.map((profile) => (
+                <Card
+                  key={profile.id}
+                  onClick={() => handleProfileSelect(profile)}
+                  className="p-6 hover:scale-105 transition-transform duration-300 cursor-pointer border-4 border-border hover:shadow-2xl"
+                >
+                  <div className="flex flex-col items-center gap-4">
+                    <img
+                      src={profile.avatar_url || mickeyImg}
+                      alt={profile.name}
+                      className="w-32 h-32 rounded-full object-cover border-4 border-primary"
+                    />
+                    <div className="text-center">
+                      <h2 className="text-2xl font-bold text-foreground">{profile.name}</h2>
+                      <p className="text-lg text-muted-foreground">Age {profile.age}</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         )}
       </div>
