@@ -48,11 +48,15 @@ const ProfileSelect = () => {
   const [newProfileAge, setNewProfileAge] = useState("");
   const [selectedCharacter, setSelectedCharacter] = useState("");
 
-  // Default profiles for the kids
+  // Pre-defined profiles for the kids.
+  //  1. Emme (age 11)    – Elsa avatar 👸
+  //  2. Anna-Claire (age 8) – Anna avatar ❄️
+  //  3. Mckenna (age 5)   – Ariel avatar 🧜‍♀️
+  //  4. Ethan (age 3)     – Mickey avatar 🐭
   const defaultProfiles = [
-    { id: "emme", name: "Emme", age: 5, avatar_url: elsaImg },
+    { id: "emme", name: "Emme", age: 11, avatar_url: elsaImg },
     { id: "anna-claire", name: "Anna-Claire", age: 8, avatar_url: annaImg },
-    { id: "mckenna", name: "Mckenna", age: 11, avatar_url: arielImg },
+    { id: "mckenna", name: "Mckenna", age: 5, avatar_url: arielImg },
     { id: "ethan", name: "Ethan", age: 3, avatar_url: mickeyImg },
   ];
 
