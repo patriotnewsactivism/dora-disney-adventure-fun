@@ -49,6 +49,41 @@ export type Database = {
           },
         ]
       }
+      learning_progress: {
+        Row: {
+          discussed_at: string
+          id: string
+          metadata: Json | null
+          milestone_type: string | null
+          profile_id: string | null
+          topic: string
+        }
+        Insert: {
+          discussed_at?: string
+          id?: string
+          metadata?: Json | null
+          milestone_type?: string | null
+          profile_id?: string | null
+          topic: string
+        }
+        Update: {
+          discussed_at?: string
+          id?: string
+          metadata?: Json | null
+          milestone_type?: string | null
+          profile_id?: string | null
+          topic?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "learning_progress_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           age: number

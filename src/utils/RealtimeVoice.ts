@@ -174,22 +174,26 @@ export class RealtimeVoiceChat {
   private audioRecorder: AudioRecorder | null = null;
   private audioQueue: AudioQueue | null = null;
   private audioContext: AudioContext | null = null;
+  private character: string;
 
   constructor(
     private onMessage: (message: any) => void,
     private onConnected: () => void,
-    private onDisconnected: () => void
-  ) {}
+    private onDisconnected: () => void,
+    character: string = "minnie"
+  ) {
+    this.character = character;
+  }
 
   async connect() {
-    const WS_URL = `wss://qlfkjfcgjlavpxjwcvmc.supabase.co/functions/v1/realtime-voice`;
+    const WS_URL = `wss://qlfkjfcgjlavpxjwcvmc.supabase.co/functions/v1/realtime-voice?character=${this.character}`;
     
     this.ws = new WebSocket(WS_URL);
     this.audioContext = new AudioContext({ sampleRate: 24000 });
     this.audioQueue = new AudioQueue(this.audioContext);
 
     this.ws.onopen = () => {
-      console.log("WebSocket connected");
+      console.log("WebSocket connected for character:", this.character);
       this.onConnected();
     };
 
