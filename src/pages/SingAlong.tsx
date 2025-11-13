@@ -21,7 +21,7 @@ const SingAlong = () => {
     setTimeout(() => setShowConfetti(false), 2000);
   };
 
-  const nextSong = () => setCurrentSong((prev + 1) % songs.length);
+  const nextSong = () => setCurrentSong((prev) => (prev + 1) % songs.length);
 
   return (
     <GameLayout title="Sing-Along! 🎤">

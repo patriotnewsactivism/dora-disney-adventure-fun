@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 interface Obstacle {
   id: number;
   x: number;
+  y?: number;
   type: string;
   emoji: string;
 }
