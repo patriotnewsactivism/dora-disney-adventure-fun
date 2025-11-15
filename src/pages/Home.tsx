@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle, User } from "lucide-react";
+import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle, Users } from "lucide-react";
 import { useProfile } from "@/contexts/ProfileContext";
 
 const Home = () => {
   const { currentProfile } = useProfile();
+  const navigate = useNavigate();
   
   const allGames = [
     // Original Games
@@ -402,7 +403,7 @@ const Home = () => {
           </div>
           <Link to="/">
             <Button size="lg" variant="outline" className="text-lg">
-              <User className="mr-2 h-5 w-5" />
+              <Users className="mr-2 h-5 w-5" />
               Switch Player
             </Button>
           </Link>

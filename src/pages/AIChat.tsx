@@ -95,6 +95,24 @@ const AIChat = () => {
     return 'general conversation';
   };
 
+  const [currentAssistantMessage, setCurrentAssistantMessage] = useState("");
+
+  const saveMessage = async (role: 'user' | 'assistant', content: string, audioTranscript?: string) => {
+    if (!currentProfile) return;
+    
+    try {
+      await supabase.from('conversation_messages').insert({
+        profile_id: currentProfile.id,
+        character: selectedCharacter,
+        role,
+        content,
+        audio_transcript: audioTranscript
+      });
+    } catch (error) {
+      console.error('Error saving message:', error);
+    }
+  };
+
   const saveProgress = async (topic: string, milestone?: string) => {
     if (!currentProfile) return;
     
@@ -124,6 +142,10 @@ const AIChat = () => {
       const transcript = event.transcript;
       if (transcript) {
         setMessages(prev => [...prev, { role: "user", content: transcript }]);
+        
+        // Save user message
+        saveMessage('user', transcript, transcript);
+        
         const topic = extractTopic(transcript);
         if (topic !== lastTopic) {
           setLastTopic(topic);
@@ -131,23 +153,15 @@ const AIChat = () => {
         }
       }
     } else if (event.type === 'response.audio_transcript.delta') {
-      const delta = event.delta;
-      if (delta) {
-        setMessages(prev => {
-          const last = prev[prev.length - 1];
-          if (last?.role === "assistant" && !last.content.includes(character.greeting.substring(0, 20))) {
-            return prev.map((m, i) => 
-              i === prev.length - 1 
-                ? { ...m, content: m.content + delta } 
-                : m
-            );
-          }
-          return [...prev, { role: "assistant", content: delta }];
-        });
-      }
+      setCurrentAssistantMessage(prev => prev + event.delta);
     } else if (event.type === 'response.audio_transcript.done') {
-      const transcript = event.transcript;
-      if (transcript) {
+      if (currentAssistantMessage) {
+        const assistantMsg = currentAssistantMessage;
+        setMessages(prev => [...prev, { role: "assistant", content: assistantMsg }]);
+        
+        // Save assistant message
+        saveMessage('assistant', assistantMsg);
+        
         // Check for educational milestones
         const milestoneKeywords = {
           'first number': /count|number|one|two|three/i,
@@ -157,11 +171,13 @@ const AIChat = () => {
         };
         
         for (const [milestone, regex] of Object.entries(milestoneKeywords)) {
-          if (regex.test(transcript)) {
-            saveProgress(extractTopic(transcript), milestone);
+          if (regex.test(assistantMsg)) {
+            saveProgress(extractTopic(assistantMsg), milestone);
             break;
           }
         }
+        
+        setCurrentAssistantMessage('');
       }
     } else if (event.type === 'error') {
       toast({

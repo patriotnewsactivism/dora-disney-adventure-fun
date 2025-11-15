@@ -14,12 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      conversation_messages: {
+        Row: {
+          audio_transcript: string | null
+          character: string
+          content: string
+          created_at: string
+          id: string
+          profile_id: string | null
+          role: string
+        }
+        Insert: {
+          audio_transcript?: string | null
+          character: string
+          content: string
+          created_at?: string
+          id?: string
+          profile_id?: string | null
+          role: string
+        }
+        Update: {
+          audio_transcript?: string | null
+          character?: string
+          content?: string
+          created_at?: string
+          id?: string
+          profile_id?: string | null
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "conversation_messages_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       game_progress: {
         Row: {
           completed_at: string | null
           game_type: string
           id: string
           metadata: Json | null
+          played_at: string | null
           profile_id: string | null
           score: number | null
         }
@@ -28,6 +67,7 @@ export type Database = {
           game_type: string
           id?: string
           metadata?: Json | null
+          played_at?: string | null
           profile_id?: string | null
           score?: number | null
         }
@@ -36,6 +76,7 @@ export type Database = {
           game_type?: string
           id?: string
           metadata?: Json | null
+          played_at?: string | null
           profile_id?: string | null
           score?: number | null
         }
