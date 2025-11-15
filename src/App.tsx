@@ -12,6 +12,7 @@ import Hangman from "./pages/Hangman";
 import Checkers from "./pages/Checkers";
 import ColorByNumber from "./pages/ColorByNumber";
 import AIChat from "./pages/AIChat";
+import ParentDashboard from "./pages/ParentDashboard";
 import NotFound from "./pages/NotFound";
 
 // New Games - Ethan (Age 3)
@@ -83,6 +84,7 @@ const App = () => (
             <Route path="/checkers" element={<Checkers />} />
             <Route path="/coloring" element={<ColorByNumber />} />
             <Route path="/aichat" element={<AIChat />} />
+            <Route path="/parent-dashboard" element={<ParentDashboard />} />
 
             {/* Ethan's Games (Age 3) */}
             <Route path="/monster-truck-racing" element={<MonsterTruckRacing />} />
