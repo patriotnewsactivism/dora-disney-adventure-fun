@@ -111,7 +111,7 @@ const SimonSays = () => {
   };
 
   return (
-    <GameLayout title="Simon Says! 🎵">
+    <GameLayout title="Simon Says! ðµ">
       {showConfetti && <Confetti />}
 
       <div className="max-w-3xl mx-auto">
@@ -130,18 +130,18 @@ const SimonSays = () => {
           </div>
           {isPlaying && (
             <p className="text-2xl text-accent animate-pulse">
-              Watch Carefully! 👀
+              Watch Carefully! ð
             </p>
           )}
           {isUserTurn && (
             <p className="text-2xl text-success animate-pulse">
-              Your Turn! Tap the Colors! 👆
+              Your Turn! Tap the Colors! ð
             </p>
           )}
           {gameOver && (
             <div>
               <h2 className="text-4xl font-bold text-destructive mb-2">
-                {score >= 5 ? "🏆 Great Job! 🏆" : "Oops! Try Again!"}
+                {score >= 5 ? "ð Great Job! ð" : "Oops! Try Again!"}
               </h2>
               <p className="text-2xl text-muted-foreground">
                 You reached level {score + 1}!

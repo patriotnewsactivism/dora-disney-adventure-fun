@@ -390,11 +390,11 @@ const Home = () => {
         <div className="flex justify-between items-center mb-8">
           <div className="text-center flex-1">
             <h1 className="text-6xl md:text-7xl font-bold mb-4 text-primary animate-bounce">
-              🎮 Disney Games Hub! 🎮
+              ð® Disney Games Hub! ð®
             </h1>
             {currentProfile && (
               <p className="text-2xl text-muted-foreground">
-                Welcome back, {currentProfile.name}! 🌟
+                Welcome back, {currentProfile.name}! ð
               </p>
             )}
             <p className="text-xl text-muted-foreground">

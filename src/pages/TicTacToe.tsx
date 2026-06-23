@@ -42,11 +42,11 @@ const TicTacToe = () => {
     const gameWinner = checkWinner(board);
     if (gameWinner) {
       setWinner(gameWinner);
-      setPopupMessage(gameWinner === "X" ? "Mickey wins! 🎉" : "Minnie wins! 🎉");
+      setPopupMessage(gameWinner === "X" ? "Mickey wins! ð" : "Minnie wins! ð");
       setShowPopup(true);
     } else if (board.every((cell) => cell !== null)) {
       setWinner("tie");
-      setPopupMessage("It's a tie! Great game! 🤝");
+      setPopupMessage("It's a tie! Great game! ð¤");
       setShowPopup(true);
     }
   }, [board]);
@@ -68,7 +68,7 @@ const TicTacToe = () => {
   };
 
   return (
-    <GameLayout title="Tic-Tac-Toe 🎯">
+    <GameLayout title="Tic-Tac-Toe ð¯">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <div className="flex justify-center gap-8 mb-6">
@@ -89,12 +89,12 @@ const TicTacToe = () => {
           )}
           {winner && winner !== "tie" && (
             <p className="text-4xl font-bold text-success animate-bounce">
-              {winner === "X" ? "🎉 Mickey Wins! 🎉" : "🎉 Minnie Wins! 🎉"}
+              {winner === "X" ? "ð Mickey Wins! ð" : "ð Minnie Wins! ð"}
             </p>
           )}
           {winner === "tie" && (
             <p className="text-4xl font-bold text-muted-foreground animate-bounce">
-              🤝 It's a Tie! 🤝
+              ð¤ It's a Tie! ð¤
             </p>
           )}
         </div>

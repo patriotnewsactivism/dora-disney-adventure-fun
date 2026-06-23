@@ -7,10 +7,10 @@ import rapunzelImg from "@/assets/rapunzel.png";
 
 const PixieHollow = () => {
   const talents = [
-    { id: "light", name: "Light Fairy", emoji: "✨", color: "bg-yellow-400" },
-    { id: "garden", name: "Garden Fairy", emoji: "🌸", color: "bg-green-400" },
-    { id: "animal", name: "Animal Fairy", emoji: "🦋", color: "bg-blue-400" },
-    { id: "water", name: "Water Fairy", emoji: "💧", color: "bg-cyan-400" },
+    { id: "light", name: "Light Fairy", emoji: "â¨", color: "bg-yellow-400" },
+    { id: "garden", name: "Garden Fairy", emoji: "ð¸", color: "bg-green-400" },
+    { id: "animal", name: "Animal Fairy", emoji: "ð¦", color: "bg-blue-400" },
+    { id: "water", name: "Water Fairy", emoji: "ð§", color: "bg-cyan-400" },
   ];
 
   const challenges = [
@@ -57,7 +57,7 @@ const PixieHollow = () => {
   };
 
   return (
-    <GameLayout title="Pixie Hollow Adventures! 🧚">
+    <GameLayout title="Pixie Hollow Adventures! ð§">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">

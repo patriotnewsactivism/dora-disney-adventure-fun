@@ -14,9 +14,9 @@ const MonsterTruckRacing = () => {
   const raceRef = useRef<NodeJS.Timeout | null>(null);
 
   const trucks = [
-    { id: 1, name: "Red Crusher", color: "bg-red-500", emoji: "🚗" },
-    { id: 2, name: "Blue Thunder", color: "bg-blue-500", emoji: "🚙" },
-    { id: 3, name: "Green Machine", color: "bg-green-500", emoji: "🚕" },
+    { id: 1, name: "Red Crusher", color: "bg-red-500", emoji: "ð" },
+    { id: 2, name: "Blue Thunder", color: "bg-blue-500", emoji: "ð" },
+    { id: 3, name: "Green Machine", color: "bg-green-500", emoji: "ð" },
   ];
 
   const [selectedTruck, setSelectedTruck] = useState(trucks[0]);
@@ -78,7 +78,7 @@ const MonsterTruckRacing = () => {
   const hasLost = opponentProgress >= 100 && opponentProgress > raceProgress;
 
   return (
-    <GameLayout title="Monster Truck Racing! 🏁">
+    <GameLayout title="Monster Truck Racing! ð">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -87,7 +87,7 @@ const MonsterTruckRacing = () => {
             Tap to Make Your Truck Go!
           </h2>
           <p className="text-xl text-muted-foreground">
-            Tap anywhere to race! First to finish wins! 🏁
+            Tap anywhere to race! First to finish wins! ð
           </p>
         </div>
 
@@ -125,7 +125,7 @@ const MonsterTruckRacing = () => {
             </div>
             <div className="h-24 bg-gradient-to-r from-green-200 to-green-400 rounded-2xl border-4 border-green-600 relative overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-green-800 opacity-20">
-                🏁 🏁 🏁 🏁 🏁
+                ð ð ð ð ð
               </div>
               <div
                 className="absolute top-1/2 -translate-y-1/2 transition-all duration-100 text-6xl"
@@ -144,13 +144,13 @@ const MonsterTruckRacing = () => {
             </div>
             <div className="h-24 bg-gradient-to-r from-orange-200 to-orange-400 rounded-2xl border-4 border-orange-600 relative overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center text-4xl font-bold text-orange-800 opacity-20">
-                🏁 🏁 🏁 🏁 🏁
+                ð ð ð ð ð
               </div>
               <div
                 className="absolute top-1/2 -translate-y-1/2 transition-all duration-100 text-6xl"
                 style={{ left: `${opponentProgress}%` }}
               >
-                🚌
+                ð
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@ const MonsterTruckRacing = () => {
           {hasWon && (
             <div className="animate-bounce">
               <h2 className="text-5xl font-bold text-success mb-4">
-                🏆 YOU WON! 🏆
+                ð YOU WON! ð
               </h2>
               <p className="text-2xl text-muted-foreground">
                 Great job! You tapped {tapCount} times!
@@ -193,7 +193,7 @@ const MonsterTruckRacing = () => {
 
           {isRacing && (
             <p className="text-2xl text-primary font-bold animate-pulse">
-              Keep Tapping! 👆
+              Keep Tapping! ð
             </p>
           )}
 

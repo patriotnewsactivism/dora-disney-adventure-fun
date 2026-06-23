@@ -110,7 +110,7 @@ const PrincessAcademy = () => {
   const challenge = challenges[currentChallenge];
 
   return (
-    <GameLayout title="Princess Academy! 👑">
+    <GameLayout title="Princess Academy! ð">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -202,7 +202,7 @@ const PrincessAcademy = () => {
         ) : (
           <>
             <div className="text-center mb-8">
-              <div className="text-8xl mb-4 animate-bounce">👑</div>
+              <div className="text-8xl mb-4 animate-bounce">ð</div>
               <h2 className="text-6xl font-bold text-pink-600 mb-4">
                 Congratulations, Princess!
               </h2>

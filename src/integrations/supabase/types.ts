@@ -7,8 +7,6 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instantiate createClient with right options
-  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "13.0.5"
   }
@@ -49,7 +47,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
-          },
+          }
         ]
       }
       game_progress: {
@@ -87,7 +85,7 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
-          },
+          }
         ]
       }
       learning_progress: {
@@ -122,7 +120,54 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
-          },
+          }
+        ]
+      }
+      memory_game_sessions: {
+        Row: {
+          created_at: string
+          current_player_id: string | null
+          game_id: string
+          game_state: Json | null
+          host_id: string
+          is_active: boolean
+          player_ids: string[] | null
+          player_scores: Json | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_player_id?: string | null
+          game_id?: string
+          game_state?: Json | null
+          host_id: string
+          is_active?: boolean
+          player_ids?: string[] | null
+          player_scores?: Json | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_player_id?: string | null
+          game_id?: string
+          game_state?: Json | null
+          host_id?: string
+          is_active?: boolean
+          player_ids?: string[] | null
+          player_scores?: Json | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memory_game_sessions_host_id_fkey"
+            columns: ["host_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
         ]
       }
       profiles: {
@@ -148,6 +193,44 @@ export type Database = {
           name?: string
         }
         Relationships: []
+      }
+      achievements: {
+        Row: {
+          id: string
+          profile_id: string
+          achievement_id: string
+          progress: number
+          unlocked_at: string | null
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          profile_id: string
+          achievement_id: string
+          progress?: number
+          unlocked_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          profile_id?: string
+          achievement_id?: string
+          progress?: number
+          unlocked_at?: string | null
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "achievements_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
       }
     }
     Views: {
@@ -190,8 +273,7 @@ export type Tables<
     : never
   : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
         DefaultSchema["Views"])
-    ? (DefaultSchema["Tables"] &
-        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+    ? (DefaultSchema["Tables"] & DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
         Row: infer R
       }
       ? R

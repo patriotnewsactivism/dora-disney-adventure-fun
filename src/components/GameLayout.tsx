@@ -2,25 +2,38 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Home } from "lucide-react";
+import { Progress } from "./ui/progress";
 
 interface GameLayoutProps {
   children: ReactNode;
   title: string;
+  progress?: number;
+  progressLabel?: string;
 }
 
-const GameLayout = ({ children, title }: GameLayoutProps) => {
+const GameLayout = ({ children, title, progress, progressLabel }: GameLayoutProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted to-background">
       <div className="container mx-auto px-4 py-6">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-4xl md:text-5xl font-bold text-primary">{title}</h1>
           <Link to="/">
-            <Button size="lg" variant="outline" className="text-lg">
+            <Button size="lg" variant="outline" className="text-lg" aria-label="Return to home page">
               <Home className="mr-2 h-5 w-5" />
               Home
             </Button>
           </Link>
         </div>
+        {progress !== undefined && (
+          <div className="mb-6 space-y-2">
+            <Progress value={progress} className="h-3" aria-label={progressLabel} />
+            {progressLabel && (
+              <p className="text-sm text-muted-foreground" aria-hidden="true">
+                {progressLabel}
+              </p>
+            )}
+          </div>
+        )}
         {children}
       </div>
     </div>

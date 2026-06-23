@@ -18,10 +18,10 @@ const MusicMaker = () => {
   const startTimeRef = useRef<number>(0);
 
   const instruments = [
-    { id: "piano", name: "🎹 Piano", color: "bg-blue-500", type: "sine" },
-    { id: "drum", name: "🥁 Drum", color: "bg-red-500", type: "sawtooth" },
-    { id: "guitar", name: "🎸 Guitar", color: "bg-green-500", type: "square" },
-    { id: "bell", name: "🔔 Bell", color: "bg-yellow-500", type: "triangle" },
+    { id: "piano", name: "ð¹ Piano", color: "bg-blue-500", type: "sine" },
+    { id: "drum", name: "ð¥ Drum", color: "bg-red-500", type: "sawtooth" },
+    { id: "guitar", name: "ð¸ Guitar", color: "bg-green-500", type: "square" },
+    { id: "bell", name: "ð Bell", color: "bg-yellow-500", type: "triangle" },
   ];
 
   const notes = [
@@ -111,7 +111,7 @@ const MusicMaker = () => {
   };
 
   return (
-    <GameLayout title="Music Maker! 🎵">
+    <GameLayout title="Music Maker! ðµ">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-primary mb-4">
@@ -132,7 +132,7 @@ const MusicMaker = () => {
           </div>
           {isPlaying && (
             <div className="text-2xl font-bold text-accent animate-pulse">
-              ♪ Playing... ♪
+              âª Playing... âª
             </div>
           )}
         </div>

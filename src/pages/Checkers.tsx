@@ -102,7 +102,7 @@ const Checkers = () => {
   };
 
   return (
-    <GameLayout title="Checkers 🎯">
+    <GameLayout title="Checkers ð¯">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <div className="flex justify-center gap-8 mb-6">
@@ -146,7 +146,7 @@ const Checkers = () => {
                           className="w-full h-full object-contain"
                         />
                         {piece.isKing && (
-                          <div className="absolute top-0 right-0 text-2xl">👑</div>
+                          <div className="absolute top-0 right-0 text-2xl">ð</div>
                         )}
                       </div>
                     )}

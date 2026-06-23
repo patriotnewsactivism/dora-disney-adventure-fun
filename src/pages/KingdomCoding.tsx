@@ -6,8 +6,8 @@ import Confetti from "@/components/Confetti";
 
 const KingdomCoding = () => {
   const challenges = [
-    { id: 1, task: "Move the hero to the castle", start: 0, goal: 5, solution: ["→", "→", "→", "→", "→"] },
-    { id: 2, task: "Move right 3, then left 1", start: 0, goal: 2, solution: ["→", "→", "→", "←"] },
+    { id: 1, task: "Move the hero to the castle", start: 0, goal: 5, solution: ["â", "â", "â", "â", "â"] },
+    { id: 2, task: "Move right 3, then left 1", start: 0, goal: 2, solution: ["â", "â", "â", "â"] },
   ];
 
   const [currentChallenge, setCurrentChallenge] = useState(0);
@@ -25,8 +25,8 @@ const KingdomCoding = () => {
   const runCode = () => {
     let pos = challenge.start;
     commands.forEach(cmd => {
-      if (cmd === "→") pos++;
-      if (cmd === "←") pos--;
+      if (cmd === "â") pos++;
+      if (cmd === "â") pos--;
     });
 
     setPosition(pos);
@@ -44,7 +44,7 @@ const KingdomCoding = () => {
   };
 
   return (
-    <GameLayout title="Kingdom Coding! 💻">
+    <GameLayout title="Kingdom Coding! ð»">
       {showConfetti && <Confetti />}
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-6">
@@ -57,7 +57,7 @@ const KingdomCoding = () => {
           <div className="flex justify-around text-6xl mb-4">
             {Array(7).fill(0).map((_, i) => (
               <div key={i}>
-                {i === position ? "🦸" : i === challenge.goal ? "🏰" : "⬜"}
+                {i === position ? "ð¦¸" : i === challenge.goal ? "ð°" : "â¬"}
               </div>
             ))}
           </div>
@@ -72,17 +72,17 @@ const KingdomCoding = () => {
           </div>
 
           <div className="flex gap-4 mb-4">
-            <Button onClick={() => addCommand("→")} size="lg" className="flex-1 text-2xl">
-              Move Right →
+            <Button onClick={() => addCommand("â")} size="lg" className="flex-1 text-2xl">
+              Move Right â
             </Button>
-            <Button onClick={() => addCommand("←")} size="lg" className="flex-1 text-2xl">
-              Move Left ←
+            <Button onClick={() => addCommand("â")} size="lg" className="flex-1 text-2xl">
+              Move Left â
             </Button>
           </div>
 
           <div className="flex gap-4">
             <Button onClick={runCode} disabled={commands.length === 0} size="lg" className="flex-1 bg-green-600">
-              ▶️ Run Code
+              â¶ï¸ Run Code
             </Button>
             <Button onClick={() => { setCommands([]); setPosition(challenge.start); }} variant="outline" size="lg">
               <RotateCcw className="mr-2" />

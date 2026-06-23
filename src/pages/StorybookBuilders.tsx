@@ -21,7 +21,7 @@ const StorybookBuilders = () => {
   };
 
   return (
-    <GameLayout title="Storybook Builders! 📖">
+    <GameLayout title="Storybook Builders! ð">
       {showConfetti && <Confetti />}
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-6">
@@ -64,7 +64,7 @@ const StorybookBuilders = () => {
         {story.length >= 5 && (
           <div className="text-center">
             <h3 className="text-4xl font-bold text-purple-600 mb-2">
-              📚 Amazing Story! 📚
+              ð Amazing Story! ð
             </h3>
             <p className="text-2xl text-muted-foreground">
               Your story has {story.length} sentences!

@@ -16,7 +16,7 @@ const ComingSoon = ({ title, description, features = [] }: ComingSoonProps) => {
         <div className="max-w-3xl mx-auto">
           <Card className="p-12 text-center border-4 border-primary shadow-2xl">
             <div className="text-8xl mb-6 animate-bounce">
-              🎮
+              ð®
             </div>
 
             <h1 className="text-5xl md:text-6xl font-bold mb-6 text-primary">
@@ -46,7 +46,7 @@ const ComingSoon = ({ title, description, features = [] }: ComingSoonProps) => {
                 <ul className="text-left text-lg space-y-2 max-w-lg mx-auto">
                   {features.map((feature, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <span className="text-2xl">✨</span>
+                      <span className="text-2xl">â¨</span>
                       <span>{feature}</span>
                     </li>
                   ))}

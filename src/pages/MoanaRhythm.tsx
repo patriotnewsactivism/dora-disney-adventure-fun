@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import Confetti from "@/components/Confetti";
 
 const MoanaRhythm = () => {
-  const drums = ["🥁", "🪘", "🎵", "🎶"];
+  const drums = ["ð¥", "ðª", "ðµ", "ð¶"];
   const [sequence, setSequence] = useState<number[]>([]);
   const [playerSequence, setPlayerSequence] = useState<number[]>([]);
   const [score, setScore] = useState(0);
@@ -38,10 +38,10 @@ const MoanaRhythm = () => {
   };
 
   return (
-    <GameLayout title="Moana's Rhythm! 🥁">
+    <GameLayout title="Moana's Rhythm! ð¥">
       {showConfetti && <Confetti />}
       <div className="max-w-4xl mx-auto text-center">
-        <div className="text-8xl mb-4">🌺</div>
+        <div className="text-8xl mb-4">ðº</div>
         <h2 className="text-3xl mb-6">Repeat the Rhythm!</h2>
         {sequence.length === 0 ? (
           <Button onClick={startGame} size="lg">Start Game</Button>
