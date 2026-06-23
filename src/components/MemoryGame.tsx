@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import MemoryCard from './MemoryCard';
 import { shuffleArray } from '../lib/utils';
-import { useAnnouncer } from '@react-aria/live-announcer';
+import { announce } from '@react-aria/live-announcer';
 
 interface Card {
   id: number;
@@ -32,7 +32,6 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ onGameComplete }) => {
   const [matchedCards, setMatchedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [isChecking, setIsChecking] = useState(false);
-  const announce = useAnnouncer();
 
   const initializeGame = useCallback(() => {
     const initialCards: Card[] = [...cardImages, ...cardImages]
@@ -49,7 +48,7 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ onGameComplete }) => {
     setMoves(0);
     setIsChecking(false);
     announce('New game started. Find matching pairs!');
-  }, [announce]);
+  }, []);
 
   useEffect(() => {
     initializeGame();
@@ -60,7 +59,7 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ onGameComplete }) => {
       announce('Congratulations! You found all the matches!');
       onGameComplete(cardImages.length);
     }
-  }, [matchedCards, onGameComplete, announce]);
+  }, [matchedCards, onGameComplete]);
 
   const handleCardClick = (id: number) => {
     if (isChecking || flippedCards.length === 2 || cards[id].isMatched || cards[id].isFlipped) {
@@ -101,7 +100,7 @@ const MemoryGame: React.FC<MemoryGameProps> = ({ onGameComplete }) => {
         }, 1000);
       }
     }
-  }, [flippedCards, cards, announce]);
+  }, [flippedCards, cards]);
 
   return (
     <div className="flex flex-col items-center">
