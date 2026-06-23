@@ -1,10 +1,68 @@
-import MemoryGame from "@/components/MemoryGame";
-import GameLayout from "@/components/GameLayout";
+import React, { useState, useEffect } from 'react';
+import MemoryGame from '../components/MemoryGame';
+import CharacterPopup from '../components/CharacterPopup';
+import Confetti from '../components/Confetti';
+import { useProfile } from '../contexts/ProfileContext';
+import { AchievementPopup } from '../components/AchievementPopup';
+import { achievements } from '../data/achievements';
+import { Achievement } from '../data/achievements';
+import GameLayout from '../components/GameLayout'; // Import GameLayout
 
-const Memory = () => {
+const Memory: React.FC = () => {
+  const [showCharacterPopup, setShowCharacterPopup] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [showAchievementPopup, setShowAchievementPopup] = useState(false);
+  const [unlockedAchievement, setUnlockedAchievement] = useState<Achievement | null>(null);
+  const { profile, addAchievement } = useProfile();
+
+  const handleGameComplete = (matches: number) => {
+    setShowConfetti(true);
+    setTimeout(() => setShowConfetti(false), 5000); // Confetti for 5 seconds
+
+    // Check for achievements
+    const memoryMasterAchievement = achievements.find(ach => ach.id === 'memory_master');
+    if (memoryMasterAchievement && matches >= 10 && !profile?.achievements?.includes(memoryMasterAchievement.id)) {
+      addAchievement(memoryMasterAchievement.id);
+      setUnlockedAchievement(memoryMasterAchievement);
+      setShowAchievementPopup(true);
+    }
+
+    // You can add more achievement checks here based on game performance
+  };
+
   return (
-    <GameLayout title="Memory Match! ð®">
-      <MemoryGame />
+    <GameLayout title="Memory Game">
+      <div className="flex flex-col items-center justify-center p-4 relative">
+        <h1 className="sr-only">Memory Game</h1> {/* Hide main title as GameLayout provides one */}
+        <MemoryGame onGameComplete={handleGameComplete} />
+        <button
+          onClick={() => setShowCharacterPopup(true)}
+          className="mt-8 px-6 py-3 bg-blue-500 text-white rounded-full shadow-lg hover:bg-blue-600 transition duration-300 focus:outline-none focus:ring-4 focus:ring-blue-400 focus:ring-opacity-75"
+          aria-label="Show character information"
+        >
+          Show Character Info
+        </button>
+
+        {showCharacterPopup && (
+          <CharacterPopup
+            characterName="Mickey Mouse"
+            description="Mickey Mouse is a cartoon character created in 1928 by Walt Disney and Ub Iwerks. He is the official mascot of The Walt Disney Company."
+            imageUrl="/assets/characters/mickey.png" // Replace with actual image path
+            onClose={() => setShowCharacterPopup(false)}
+            aria-label="Mickey Mouse character information popup"
+          />
+        )}
+
+        {showConfetti && <Confetti />}
+
+        {showAchievementPopup && unlockedAchievement && (
+          <AchievementPopup
+            achievement={unlockedAchievement}
+            onClose={handleCloseAchievementPopup}
+            aria-label={`Achievement unlocked: ${unlockedAchievement.name}`}
+          />
+        )}
+      </div>
     </GameLayout>
   );
 };

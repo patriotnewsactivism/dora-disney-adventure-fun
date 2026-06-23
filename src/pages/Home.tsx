@@ -3,11 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle, Users } from "lucide-react";
 import { useProfile } from "@/contexts/ProfileContext";
+import ProgressMap from "@/components/ProgressMap";
+import { useGameProgress } from "@/contexts/GameProgressContext";
 
 const Home = () => {
   const { currentProfile } = useProfile();
+  const { gameCompletions } = useGameProgress();
   const navigate = useNavigate();
-  
+
   const allGames = [
     // Original Games
     {
@@ -408,6 +411,8 @@ const Home = () => {
             </Button>
           </Link>
         </div>
+
+        <ProgressMap games={games} gameCompletions={gameCompletions} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {games.map((game) => {
