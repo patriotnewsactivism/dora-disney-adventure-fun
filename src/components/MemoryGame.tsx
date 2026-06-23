@@ -1,300 +1,131 @@
-import { useState, useEffect } from "react";
-import MemoryCard from "./MemoryCard";
-import Confetti from "./Confetti";
-import { Button } from "./ui/button";
-import { Shuffle } from "lucide-react";
-import { cn } from "@/lib/utils";
-
-// Import character images
-import doraImg from "@/assets/dora.png";
-import mickeyImg from "@/assets/mickey.png";
-import minnieImg from "@/assets/minnie.png";
-import elsaImg from "@/assets/elsa.png";
-import simbaImg from "@/assets/simba.png";
-import moanaImg from "@/assets/moana.png";
-import cakepop1Img from "@/assets/cakepop-hunter1.png";
-import cakepop2Img from "@/assets/cakepop-hunter2.png";
-import cakepop3Img from "@/assets/cakepop-hunter3.png";
-import cakepop4Img from "@/assets/cakepop-hunter4.png";
-import bluesImg from "@/assets/blues.png";
-import annaImg from "@/assets/anna.png";
-import arielImg from "@/assets/ariel.png";
-import belleImg from "@/assets/belle.png";
-import rapunzelImg from "@/assets/rapunzel.png";
-import buzzImg from "@/assets/buzz.png";
+import React, { useState, useEffect, useCallback } from 'react';
+import MemoryCard from './MemoryCard';
+import { shuffleArray } from '../lib/utils';
+import { useAnnouncer } from '@react-aria/live-announcer';
 
 interface Card {
-  id: string;
+  id: number;
+  value: string;
   image: string;
   isFlipped: boolean;
   isMatched: boolean;
 }
 
-const allCharacters = [
-  { name: "Dora", image: doraImg },
-  { name: "Mickey", image: mickeyImg },
-  { name: "Minnie", image: minnieImg },
-  { name: "Elsa", image: elsaImg },
-  { name: "Simba", image: simbaImg },
-  { name: "Moana", image: moanaImg },
-  { name: "Cake Pop Hunter", image: cakepop1Img },
-  { name: "Cake Pop Warrior", image: cakepop2Img },
-  { name: "Cake Pop Hero", image: cakepop3Img },
-  { name: "Cake Pop Adventurer", image: cakepop4Img },
-  { name: "Blues Clues", image: bluesImg },
-  { name: "Anna", image: annaImg },
-  { name: "Ariel", image: arielImg },
-  { name: "Belle", image: belleImg },
-  { name: "Rapunzel", image: rapunzelImg },
-  { name: "Buzz Lightyear", image: buzzImg },
+interface MemoryGameProps {
+  onGameComplete: (matches: number) => void;
+}
+
+const cardImages = [
+  { value: 'Mickey', image: '/assets/characters/mickey.png' },
+  { value: 'Minnie', image: '/assets/characters/minnie.png' },
+  { value: 'Donald', image: '/assets/characters/donald.png' },
+  { value: 'Daisy', image: '/assets/characters/daisy.png' },
+  { value: 'Goofy', image: '/assets/characters/goofy.png' },
+  { value: 'Pluto', image: '/assets/characters/pluto.png' },
+  { value: 'Chip', image: '/assets/characters/chip.png' },
+  { value: 'Dale', image: '/assets/characters/dale.png' },
 ];
 
-// Round configurations - each round gets progressively harder
-const rounds = [
-  { level: 1, pairs: 3, name: "Easy" },
-  { level: 2, pairs: 4, name: "Medium" },
-  { level: 3, pairs: 5, name: "Hard" },
-  { level: 4, pairs: 5, name: "Expert" }, // Same pairs but they've done more rounds
-];
-
-const MemoryGame = () => {
+const MemoryGame: React.FC<MemoryGameProps> = ({ onGameComplete }) => {
   const [cards, setCards] = useState<Card[]>([]);
-  const [flippedCards, setFlippedCards] = useState<string[]>([]);
-  const [matchedPairs, setMatchedPairs] = useState(0);
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  const [matchedCards, setMatchedCards] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [currentRound, setCurrentRound] = useState(0);
-  const [totalMoves, setTotalMoves] = useState(0);
-  const [gameComplete, setGameComplete] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
+  const announce = useAnnouncer();
 
-  // Initialize a specific round
-  const initRound = (roundIndex: number) => {
-    const round = rounds[roundIndex];
-    const pairsNeeded = round.pairs;
-    
-    // Shuffle and select random characters for this round
-    const shuffledChars = [...allCharacters].sort(() => Math.random() - 0.5);
-    const selectedChars = shuffledChars.slice(0, pairsNeeded);
-    
-    const gameCards: Card[] = [];
-    selectedChars.forEach((char, index) => {
-      // Create two cards for each character
-      gameCards.push({
-        id: `${char.name}-1-${index}-r${roundIndex}`,
-        image: char.image,
+  const initializeGame = useCallback(() => {
+    const initialCards: Card[] = [...cardImages, ...cardImages]
+      .map((card, index) => ({
+        id: index,
+        value: card.value,
+        image: card.image,
         isFlipped: false,
         isMatched: false,
-      });
-      gameCards.push({
-        id: `${char.name}-2-${index}-r${roundIndex}`,
-        image: char.image,
-        isFlipped: false,
-        isMatched: false,
-      });
-    });
-    
-    // Shuffle cards
-    const shuffled = gameCards.sort(() => Math.random() - 0.5);
-    setCards(shuffled);
+      }));
+    setCards(shuffleArray(initialCards));
     setFlippedCards([]);
-    setMatchedPairs(0);
+    setMatchedCards([]);
     setMoves(0);
-    setShowConfetti(false);
-  };
-
-  // Start new game from beginning
-  const initGame = () => {
-    setCurrentRound(0);
-    setTotalMoves(0);
-    setGameComplete(false);
-    initRound(0);
-  };
+    setIsChecking(false);
+    announce('New game started. Find matching pairs!');
+  }, [announce]);
 
   useEffect(() => {
-    initGame();
-  }, []);
+    initializeGame();
+  }, [initializeGame]);
 
-  // Check for round completion
   useEffect(() => {
-    const currentPairsNeeded = rounds[currentRound]?.pairs || 0;
-    if (matchedPairs === currentPairsNeeded && matchedPairs > 0) {
-      setShowConfetti(true);
-      
-      // Check if this was the last round
-      if (currentRound === rounds.length - 1) {
-        setGameComplete(true);
-        setTimeout(() => setShowConfetti(false), 5000);
-      } else {
-        // Move to next round after a delay
-        setTimeout(() => {
-          setShowConfetti(false);
-          setTotalMoves(prev => prev + moves);
-          setCurrentRound(prev => prev + 1);
-        }, 2000);
-      }
+    if (matchedCards.length === cardImages.length * 2) {
+      announce('Congratulations! You found all the matches!');
+      onGameComplete(cardImages.length);
     }
-  }, [matchedPairs, currentRound, moves]);
+  }, [matchedCards, onGameComplete, announce]);
 
-  // Initialize next round when currentRound changes
-  useEffect(() => {
-    if (currentRound > 0 && currentRound < rounds.length && !gameComplete) {
-      initRound(currentRound);
+  const handleCardClick = (id: number) => {
+    if (isChecking || flippedCards.length === 2 || cards[id].isMatched || cards[id].isFlipped) {
+      return;
     }
-  }, [currentRound]);
 
-  const handleCardClick = (clickedId: string) => {
-    // Don't allow more than 2 cards flipped
-    if (flippedCards.length >= 2) return;
-
-    // Flip the card
-    setCards((prev) =>
-      prev.map((card) =>
-        card.id === clickedId ? { ...card, isFlipped: true } : card
-      )
+    const newCards = cards.map(card =>
+      card.id === id ? { ...card, isFlipped: true } : card
     );
+    setCards(newCards);
+    setFlippedCards(prev => [...prev, id]);
+  };
 
-    const newFlipped = [...flippedCards, clickedId];
-    setFlippedCards(newFlipped);
+  useEffect(() => {
+    if (flippedCards.length === 2) {
+      setIsChecking(true);
+      setMoves(prev => prev + 1);
 
-    // Check for match when 2 cards are flipped
-    if (newFlipped.length === 2) {
-      setMoves((prev) => prev + 1);
-      setTotalMoves((prev) => prev + 1);
+      const [firstCardId, secondCardId] = flippedCards;
+      const firstCard = cards.find(card => card.id === firstCardId);
+      const secondCard = cards.find(card => card.id === secondCardId);
 
-      const [firstId, secondId] = newFlipped;
-      const firstCard = cards.find((c) => c.id === firstId);
-      const secondCard = cards.find((c) => c.id === secondId);
-
-      if (firstCard && secondCard && firstCard.image === secondCard.image) {
-        // Match found!
-        setTimeout(() => {
-          setCards((prev) =>
-            prev.map((card) =>
-              card.id === firstId || card.id === secondId
-                ? { ...card, isMatched: true }
-                : card
-            )
-          );
-          setMatchedPairs((prev) => prev + 1);
-          setFlippedCards([]);
-        }, 600);
+      if (firstCard && secondCard && firstCard.value === secondCard.value) {
+        announce(`Match found! ${firstCard.value} and ${secondCard.value} are a pair.`);
+        setMatchedCards(prev => [...prev, firstCardId, secondCardId]);
+        setFlippedCards([]);
+        setIsChecking(false);
       } else {
-        // No match - flip back
+        announce('No match. Try again!');
         setTimeout(() => {
-          setCards((prev) =>
-            prev.map((card) =>
-              card.id === firstId || card.id === secondId
-                ? { ...card, isFlipped: false }
-                : card
-            )
+          const resetCards = cards.map(card =>
+            card.id === firstCardId || card.id === secondCardId
+              ? { ...card, isFlipped: false } : card
           );
+          setCards(resetCards);
           setFlippedCards([]);
+          setIsChecking(false);
         }, 1000);
       }
     }
-  };
-
-  const currentPairsNeeded = rounds[currentRound]?.pairs || 0;
-  const isRoundComplete = matchedPairs === currentPairsNeeded && matchedPairs > 0;
+  }, [flippedCards, cards, announce]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      {showConfetti && <Confetti />}
-
-      <div className="mb-8 text-center">
-        <p className="text-2xl text-muted-foreground mb-6">
-          Find all the matching character pairs!
-        </p>
-
-        {/* Round Progress */}
-        <div className="flex justify-center gap-2 mb-6">
-          {rounds.map((round, index) => (
-            <div
-              key={index}
-              className={cn(
-                "w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg transition-all duration-300",
-                index < currentRound
-                  ? "bg-success text-success-foreground shadow-lg scale-110"
-                  : index === currentRound
-                  ? "bg-primary text-primary-foreground shadow-lg scale-125 animate-pulse"
-                  : "bg-muted text-muted-foreground"
-              )}
-            >
-              {index < currentRound ? "â" : index + 1}
-            </div>
-          ))}
-        </div>
-
-        <div className="mb-6">
-          <h2 className="text-3xl font-bold text-accent mb-2">
-            Round {currentRound + 1} - {rounds[currentRound]?.name}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Match {currentPairsNeeded} pairs to advance!
-          </p>
-        </div>
-
-        <div className="flex justify-center gap-6 mb-6">
-          <div className="bg-white rounded-2xl px-6 py-3 shadow-lg border-4 border-primary">
-            <p className="text-sm text-muted-foreground">Round Moves</p>
-            <p className="text-3xl font-bold text-primary">{moves}</p>
-          </div>
-          <div className="bg-white rounded-2xl px-6 py-3 shadow-lg border-4 border-accent">
-            <p className="text-sm text-muted-foreground">Total Moves</p>
-            <p className="text-3xl font-bold text-accent">{totalMoves + moves}</p>
-          </div>
-          <div className="bg-white rounded-2xl px-6 py-3 shadow-lg border-4 border-success">
-            <p className="text-sm text-muted-foreground">Matches</p>
-            <p className="text-3xl font-bold text-success">
-              {matchedPairs}/{currentPairsNeeded}
-            </p>
-          </div>
-        </div>
-
-        {gameComplete && (
-          <div className="mb-6 animate-bounce">
-            <h2 className="text-4xl font-bold text-success mb-2">
-              ð ALL ROUNDS COMPLETE! ð
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Amazing! You beat all {rounds.length} rounds in {totalMoves + moves} total moves!
-            </p>
-          </div>
-        )}
-
-        {isRoundComplete && !gameComplete && (
-          <div className="mb-6 animate-scale-in">
-            <h2 className="text-3xl font-bold text-success mb-2">
-              â­ Round {currentRound + 1} Complete! â­
-            </h2>
-            <p className="text-xl text-muted-foreground">
-              Get ready for Round {currentRound + 2}...
-            </p>
-          </div>
-        )}
-
-        <Button
-          onClick={initGame}
-          size="lg"
-          className="bg-accent hover:bg-accent/90 text-accent-foreground shadow-lg text-xl px-8 py-6 rounded-2xl"
-        >
-          <Shuffle className="mr-2 h-6 w-6" />
-          New Game
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
-        {cards.map((card) => (
+    <div className="flex flex-col items-center">
+      <div className="grid grid-cols-4 gap-4 p-4 bg-white rounded-lg shadow-xl">
+        {cards.map(card => (
           <MemoryCard
             key={card.id}
-            id={card.id}
+            id={card.id.toString()}
             image={card.image}
             isFlipped={card.isFlipped}
             isMatched={card.isMatched}
             onClick={() => handleCardClick(card.id)}
+            cardValue={card.value}
           />
         ))}
       </div>
+      <button
+        onClick={initializeGame}
+        className="mt-6 px-6 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition duration-300 text-lg font-semibold"
+        aria-label="Reset game, press Space or Enter"
+      >
+        Reset Game
+      </button>
+      <p className="mt-4 text-xl font-semibold text-gray-700">Moves: {moves}</p>
     </div>
   );
 };
