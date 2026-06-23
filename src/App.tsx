@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProfileProvider } from "./contexts/ProfileContext";
+import { GameProgressProvider } from "./contexts/GameProgressContext"; // Import the new provider
 import ProfileSelect from "./pages/ProfileSelect";
 import Home from "./pages/Home";
 import Memory from "./pages/Memory";
@@ -73,71 +74,73 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ProfileProvider>
-          <Routes>
-            <Route path="/" element={<ProfileSelect />} />
-            <Route path="/home" element={<Home />} />
+          <GameProgressProvider> {/* Wrap routes with GameProgressProvider */}
+            <Routes>
+              <Route path="/" element={<ProfileSelect />} />
+              <Route path="/home" element={<Home />} />
 
-            {/* Original Games */}
-            <Route path="/memory" element={<Memory />} />
-            <Route path="/tictactoe" element={<TicTacToe />} />
-            <Route path="/hangman" element={<Hangman />} />
-            <Route path="/checkers" element={<Checkers />} />
-            <Route path="/coloring" element={<ColorByNumber />} />
-            <Route path="/aichat" element={<AIChat />} />
-            <Route path="/parent-dashboard" element={<ParentDashboard />} />
+              {/* Original Games */}
+              <Route path="/memory" element={<Memory />} />
+              <Route path="/tictactoe" element={<TicTacToe />} />
+              <Route path="/hangman" element={<Hangman />} />
+              <Route path="/checkers" element={<Checkers />} />
+              <Route path="/coloring" element={<ColorByNumber />} />
+              <Route path="/aichat" element={<AIChat />} />
+              <Route path="/parent-dashboard" element={<ParentDashboard />} />
 
-            {/* Ethan's Games (Age 3) */}
-            <Route path="/monster-truck-racing" element={<MonsterTruckRacing />} />
-            <Route path="/spiderman-web-sling" element={<SpiderManWebSling />} />
-            <Route path="/big-wheels-stunt" element={<BigWheelsStunt />} />
+              {/* Ethan's Games (Age 3) */}
+              <Route path="/monster-truck-racing" element={<MonsterTruckRacing />} />
+              <Route path="/spiderman-web-sling" element={<SpiderManWebSling />} />
+              <Route path="/big-wheels-stunt" element={<BigWheelsStunt />} />
 
-            {/* All Ages Games */}
-            <Route path="/whack-a-mole" element={<WhackAMole />} />
-            <Route path="/balloon-pop" element={<BalloonPop />} />
-            <Route path="/simon-says" element={<SimonSays />} />
-            <Route path="/puzzle-slide" element={<PuzzleSlide />} />
-            <Route path="/drawing-pad" element={<DrawingPad />} />
-            <Route path="/music-maker" element={<MusicMaker />} />
+              {/* All Ages Games */}
+              <Route path="/whack-a-mole" element={<WhackAMole />} />
+              <Route path="/balloon-pop" element={<BalloonPop />} />
+              <Route path="/simon-says" element={<SimonSays />} />
+              <Route path="/puzzle-slide" element={<PuzzleSlide />} />
+              <Route path="/drawing-pad" element={<DrawingPad />} />
+              <Route path="/music-maker" element={<MusicMaker />} />
 
-            {/* Educational Games */}
-            <Route path="/counting-game" element={<CountingGame />} />
-            <Route path="/letter-tracing" element={<LetterTracing />} />
-            <Route path="/shape-sorter" element={<ShapeSorter />} />
-            <Route path="/storytime" element={<Storytime />} />
+              {/* Educational Games */}
+              <Route path="/counting-game" element={<CountingGame />} />
+              <Route path="/letter-tracing" element={<LetterTracing />} />
+              <Route path="/shape-sorter" element={<ShapeSorter />} />
+              <Route path="/storytime" element={<Storytime />} />
 
-            {/* Imagination & Role-Play */}
-            <Route path="/princess-academy" element={<PrincessAcademy />} />
-            <Route path="/pixie-hollow" element={<PixieHollow />} />
-            <Route path="/frozen-ice-quest" element={<FrozenIceQuest />} />
-            <Route path="/encanto-mystery" element={<EncantoMystery />} />
-            <Route path="/ariel-treasure" element={<ArielTreasure />} />
+              {/* Imagination & Role-Play */}
+              <Route path="/princess-academy" element={<PrincessAcademy />} />
+              <Route path="/pixie-hollow" element={<PixieHollow />} />
+              <Route path="/frozen-ice-quest" element={<FrozenIceQuest />} />
+              <Route path="/encanto-mystery" element={<EncantoMystery />} />
+              <Route path="/ariel-treasure" element={<ArielTreasure />} />
 
-            {/* Creative & Craft */}
-            <Route path="/build-kingdom" element={<BuildKingdom />} />
-            <Route path="/dress-designer" element={<DressDesigner />} />
-            <Route path="/zootopia-detective" element={<ZootopiaDetective />} />
-            <Route path="/magic-carpet" element={<MagicCarpet />} />
-            <Route path="/wish-star" element={<WishStar />} />
+              {/* Creative & Craft */}
+              <Route path="/build-kingdom" element={<BuildKingdom />} />
+              <Route path="/dress-designer" element={<DressDesigner />} />
+              <Route path="/zootopia-detective" element={<ZootopiaDetective />} />
+              <Route path="/magic-carpet" element={<MagicCarpet />} />
+              <Route path="/wish-star" element={<WishStar />} />
 
-            {/* Musical & Performance */}
-            <Route path="/sing-along" element={<SingAlong />} />
-            <Route path="/under-sea-dance" element={<UnderSeaDance />} />
-            <Route path="/moana-rhythm" element={<MoanaRhythm />} />
+              {/* Musical & Performance */}
+              <Route path="/sing-along" element={<SingAlong />} />
+              <Route path="/under-sea-dance" element={<UnderSeaDance />} />
+              <Route path="/moana-rhythm" element={<MoanaRhythm />} />
 
-            {/* Digital/App-Based */}
-            <Route path="/kingdom-builder" element={<KingdomBuilder />} />
-            <Route path="/disney-emoji-quest" element={<DisneyEmojiQuest />} />
-            <Route path="/frozen-maze" element={<FrozenMaze />} />
-            <Route path="/pixie-flight" element={<PixieFlight />} />
+              {/* Digital/App-Based */}
+              <Route path="/kingdom-builder" element={<KingdomBuilder />} />
+              <Route path="/disney-emoji-quest" element={<DisneyEmojiQuest />} />
+              <Route path="/frozen-maze" element={<FrozenMaze />} />
+              <Route path="/pixie-flight" element={<PixieFlight />} />
 
-            {/* Cooperative/Educational */}
-            <Route path="/storybook-builders" element={<StorybookBuilders />} />
-            <Route path="/kingdom-coding" element={<KingdomCoding />} />
-            <Route path="/disney-bake-off" element={<DisneyBakeOff />} />
+              {/* Cooperative/Educational */}
+              <Route path="/storybook-builders" element={<StorybookBuilders />} />
+              <Route path="/kingdom-coding" element={<KingdomCoding />} />
+              <Route path="/disney-bake-off" element={<DisneyBakeOff />} />
 
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </GameProgressProvider>
         </ProfileProvider>
       </BrowserRouter>
     </TooltipProvider>
