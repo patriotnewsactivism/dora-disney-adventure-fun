@@ -7,9 +7,10 @@ interface MemoryCardProps {
   isFlipped: boolean;
   isMatched: boolean;
   onClick: () => void;
+  cardValue: string;
 }
 
-const MemoryCard = ({ image, isFlipped, isMatched, onClick }: MemoryCardProps) => {
+const MemoryCard = ({ image, isFlipped, isMatched, onClick, cardValue }: MemoryCardProps) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
@@ -28,12 +29,16 @@ const MemoryCard = ({ image, isFlipped, isMatched, onClick }: MemoryCardProps) =
         "relative aspect-square w-full rounded-3xl transition-all duration-300 transform",
         "hover:scale-105 active:scale-95",
         "disabled:cursor-not-allowed",
+        "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2",
         animate && "animate-bounce"
       )}
       style={{
         transformStyle: "preserve-3d",
         transform: isFlipped || isMatched ? "rotateY(180deg)" : "rotateY(0deg)",
       }}
+      aria-label={`${cardValue} card, ${isMatched ? 'matched' : isFlipped ? 'flipped' : 'not flipped'}`}
+      role="gridcell"
+      tabIndex={0}
     >
       {/* Card back - question mark */}
       <div
@@ -46,6 +51,7 @@ const MemoryCard = ({ image, isFlipped, isMatched, onClick }: MemoryCardProps) =
           backfaceVisibility: "hidden",
           transform: "rotateY(0deg)",
         }}
+        aria-hidden="true"
       >
         <span className="text-6xl font-bold text-white">?</span>
       </div>
@@ -62,11 +68,13 @@ const MemoryCard = ({ image, isFlipped, isMatched, onClick }: MemoryCardProps) =
           backfaceVisibility: "hidden",
           transform: "rotateY(180deg)",
         }}
+        aria-hidden="true"
       >
         <img
           src={image}
-          alt="Character"
+          alt={`${cardValue} character`}
           className="w-full h-full object-contain"
+          aria-hidden="true"
         />
       </div>
     </button>

@@ -34,7 +34,7 @@ export const secureSubscribe = async (options: SubscriptionOptions) => {
   const { table, filter, callback } = options;
 
   // Validate table name against allowed list
-  const allowedTables = ['memory_game_sessions'];
+  const allowedTables = ['memory_game_sessions', 'rewards_transactions'];
   if (!allowedTables.includes(table)) {
     throw new Error(`Subscription to table ${table} is not allowed`);
   }
