@@ -220,7 +220,7 @@ const MemoryGame = () => {
                   : "bg-muted text-muted-foreground"
               )}
             >
-              {index < currentRound ? "✓" : index + 1}
+              {index < currentRound ? "â" : index + 1}
             </div>
           ))}
         </div>
@@ -254,7 +254,7 @@ const MemoryGame = () => {
         {gameComplete && (
           <div className="mb-6 animate-bounce">
             <h2 className="text-4xl font-bold text-success mb-2">
-              🎉 ALL ROUNDS COMPLETE! 🎉
+              ð ALL ROUNDS COMPLETE! ð
             </h2>
             <p className="text-xl text-muted-foreground">
               Amazing! You beat all {rounds.length} rounds in {totalMoves + moves} total moves!
@@ -265,7 +265,7 @@ const MemoryGame = () => {
         {isRoundComplete && !gameComplete && (
           <div className="mb-6 animate-scale-in">
             <h2 className="text-3xl font-bold text-success mb-2">
-              ⭐ Round {currentRound + 1} Complete! ⭐
+              â­ Round {currentRound + 1} Complete! â­
             </h2>
             <p className="text-xl text-muted-foreground">
               Get ready for Round {currentRound + 2}...

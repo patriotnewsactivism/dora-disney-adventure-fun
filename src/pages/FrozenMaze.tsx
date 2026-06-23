@@ -26,7 +26,7 @@ const FrozenMaze = () => {
   };
 
   return (
-    <GameLayout title="Frozen Maze! 🧊">
+    <GameLayout title="Frozen Maze! ð§">
       {showConfetti && <Confetti />}
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-4">Help Anna Find Elsa!</h2>
@@ -42,8 +42,8 @@ const FrozenMaze = () => {
 
               return (
                 <div key={i} className="aspect-square bg-white rounded-lg border-2 border-cyan-300 flex items-center justify-center text-4xl">
-                  {isPlayer && "👧"}
-                  {isGoal && "❄️"}
+                  {isPlayer && "ð§"}
+                  {isGoal && "âï¸"}
                 </div>
               );
             })}
@@ -52,13 +52,13 @@ const FrozenMaze = () => {
 
         <div className="grid grid-cols-3 gap-4 max-w-xs mx-auto">
           <div />
-          <Button onClick={() => move(0, -1)} size="lg">⬆️</Button>
+          <Button onClick={() => move(0, -1)} size="lg">â¬ï¸</Button>
           <div />
-          <Button onClick={() => move(-1, 0)} size="lg">⬅️</Button>
+          <Button onClick={() => move(-1, 0)} size="lg">â¬ï¸</Button>
           <div />
-          <Button onClick={() => move(1, 0)} size="lg">➡️</Button>
+          <Button onClick={() => move(1, 0)} size="lg">â¡ï¸</Button>
           <div />
-          <Button onClick={() => move(0, 1)} size="lg">⬇️</Button>
+          <Button onClick={() => move(0, 1)} size="lg">â¬ï¸</Button>
         </div>
       </div>
     </GameLayout>

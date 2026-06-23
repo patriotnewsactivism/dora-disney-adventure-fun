@@ -71,7 +71,7 @@ const Hangman = () => {
     .join(" ");
 
   return (
-    <GameLayout title="Hangman 📝">
+    <GameLayout title="Hangman ð">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-8">
           <div className="mb-6">
@@ -90,12 +90,12 @@ const Hangman = () => {
 
           {gameWon && (
             <p className="text-4xl font-bold text-success animate-bounce mb-4">
-              🎉 You Won! Great Job! 🎉
+              ð You Won! Great Job! ð
             </p>
           )}
           {gameLost && (
             <p className="text-4xl font-bold text-destructive animate-bounce mb-4">
-              😢 Game Over! The word was {currentWord.word}
+              ð¢ Game Over! The word was {currentWord.word}
             </p>
           )}
         </div>
@@ -130,7 +130,7 @@ const Hangman = () => {
         {showPopup && (
           <CharacterPopup
             character="Dora"
-            message={gameWon ? "Excelente! You got it! 🎉" : "Try again! You can do it! 💪"}
+            message={gameWon ? "Excelente! You got it! ð" : "Try again! You can do it! ðª"}
             image={doraImg}
             onComplete={() => setShowPopup(false)}
           />

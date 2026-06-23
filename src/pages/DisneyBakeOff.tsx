@@ -6,9 +6,9 @@ import Confetti from "@/components/Confetti";
 
 const DisneyBakeOff = () => {
   const recipes = [
-    { name: "Mickey Cookies", ingredients: ["🍪", "🧈", "🥚", "🍫"], emoji: "🍪" },
-    { name: "Elsa's Ice Cream", ingredients: ["🥛", "❄️", "🍓", "🍦"], emoji: "🍦" },
-    { name: "Belle's Cupcakes", ingredients: ["🧁", "🎂", "🌹", "✨"], emoji: "🧁" },
+    { name: "Mickey Cookies", ingredients: ["ðª", "ð§", "ð¥", "ð«"], emoji: "ðª" },
+    { name: "Elsa's Ice Cream", ingredients: ["ð¥", "âï¸", "ð", "ð¦"], emoji: "ð¦" },
+    { name: "Belle's Cupcakes", ingredients: ["ð§", "ð", "ð¹", "â¨"], emoji: "ð§" },
   ];
 
   const [currentRecipe, setCurrentRecipe] = useState(0);
@@ -35,7 +35,7 @@ const DisneyBakeOff = () => {
   };
 
   return (
-    <GameLayout title="Disney Bake-Off! 🧁">
+    <GameLayout title="Disney Bake-Off! ð§">
       {showConfetti && <Confetti />}
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-6">
@@ -60,7 +60,7 @@ const DisneyBakeOff = () => {
         <div className="bg-white rounded-3xl border-4 border-orange-300 p-6 mb-6">
           <h3 className="text-2xl font-bold mb-4">Available Ingredients:</h3>
           <div className="grid grid-cols-4 gap-4">
-            {["🍪", "🧈", "🥚", "🍫", "🥛", "❄️", "🍓", "🍦", "🧁", "🎂", "🌹", "✨"].map(ing => (
+            {["ðª", "ð§", "ð¥", "ð«", "ð¥", "âï¸", "ð", "ð¦", "ð§", "ð", "ð¹", "â¨"].map(ing => (
               <button
                 key={ing}
                 onClick={() => addIngredient(ing)}

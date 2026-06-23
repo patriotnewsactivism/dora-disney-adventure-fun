@@ -33,3 +33,31 @@ ALTER TABLE public.game_progress
 
 CREATE INDEX IF NOT EXISTS idx_game_progress_profile_id ON public.game_progress(profile_id);
 CREATE INDEX IF NOT EXISTS idx_game_progress_played_at ON public.game_progress(played_at DESC);
+
+-- Add achievements table
+CREATE TABLE IF NOT EXISTS public.achievements (
+  id UUID NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
+  profile_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+  achievement_id TEXT NOT NULL, -- Unique identifier for the achievement (e.g., 'first_game_completed')
+  progress INTEGER NOT NULL DEFAULT 0, -- Current progress towards the achievement
+  is_unlocked BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+  UNIQUE (profile_id, achievement_id) -- Ensure a profile can only have one entry per achievement
+);
+
+-- Enable RLS for achievements
+ALTER TABLE public.achievements ENABLE ROW LEVEL SECURITY;
+
+-- Policies for achievements table
+CREATE POLICY "Allow read access to user achievements" ON public.achievements
+  FOR SELECT USING (auth.uid() = profile_id);
+
+CREATE POLICY "Allow insert access for user achievements" ON public.achievements
+  FOR INSERT WITH CHECK (auth.uid() = profile_id);
+
+CREATE POLICY "Allow update access for user achievements" ON public.achievements
+  FOR UPDATE USING (auth.uid() = profile_id) WITH CHECK (auth.uid() = profile_id);
+
+-- Create index for faster queries on achievements
+CREATE INDEX idx_achievements_profile_id ON public.achievements(profile_id);
+CREATE INDEX idx_achievements_achievement_id ON public.achievements(achievement_id);

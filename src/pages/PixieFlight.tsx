@@ -41,24 +41,24 @@ const PixieFlight = () => {
   }, [gameOver, position, score]);
 
   return (
-    <GameLayout title="Pixie Flight! 🧚">
+    <GameLayout title="Pixie Flight! ð§">
       {showConfetti && <Confetti />}
       <div className="max-w-4xl mx-auto text-center">
         <p className="text-2xl mb-4">Score: {score}</p>
         {!gameOver ? (
           <>
             <div className="relative bg-gradient-to-br from-green-200 to-pink-200 rounded-3xl h-[500px] border-4 border-green-400 overflow-hidden mb-6">
-              <div className="absolute left-[10%] text-6xl" style={{ top: `${position}%` }}>🧚</div>
-              {obstacles.map(o => <div key={o.id} className="absolute text-6xl" style={{ left: `${o.position}%`, top: `${o.top}%` }}>🌳</div>)}
+              <div className="absolute left-[10%] text-6xl" style={{ top: `${position}%` }}>ð§</div>
+              {obstacles.map(o => <div key={o.id} className="absolute text-6xl" style={{ left: `${o.position}%`, top: `${o.top}%` }}>ð³</div>)}
             </div>
             <div className="flex gap-4 justify-center">
-              <Button onClick={() => setPosition(p => Math.max(10, p - 15))} size="lg">⬆️ Up</Button>
-              <Button onClick={() => setPosition(p => Math.min(90, p + 15))} size="lg">⬇️ Down</Button>
+              <Button onClick={() => setPosition(p => Math.max(10, p - 15))} size="lg">â¬ï¸ Up</Button>
+              <Button onClick={() => setPosition(p => Math.min(90, p + 15))} size="lg">â¬ï¸ Down</Button>
             </div>
           </>
         ) : (
           <div>
-            <div className="text-8xl mb-4">💫</div>
+            <div className="text-8xl mb-4">ð«</div>
             <h2 className="text-4xl font-bold mb-4">Game Over!</h2>
             <p className="text-2xl mb-6">Final Score: {score}</p>
             <Button onClick={() => { setGameOver(false); setPosition(50); setObstacles([]); setScore(0); }} size="lg">

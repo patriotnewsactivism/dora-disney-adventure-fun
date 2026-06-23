@@ -15,14 +15,14 @@ interface Treasure {
 
 const ArielTreasure = () => {
   const initialTreasures: Treasure[] = [
-    { id: 1, name: "Fork (Dinglehopper)", emoji: "🍴", description: "Used for combing hair!", found: false },
-    { id: 2, name: "Spyglass", emoji: "🔭", description: "See far away things!", found: false },
-    { id: 3, name: "Music Box", emoji: "🎵", description: "Plays beautiful melodies!", found: false },
-    { id: 4, name: "Statue", emoji: "🗿", description: "A mysterious figure!", found: false },
-    { id: 5, name: "Book", emoji: "📖", description: "Full of human stories!", found: false },
-    { id: 6, name: "Crown", emoji: "👑", description: "Worn by royalty!", found: false },
-    { id: 7, name: "Compass", emoji: "🧭", description: "Shows directions!", found: false },
-    { id: 8, name: "Bell", emoji: "🔔", description: "Makes pretty sounds!", found: false },
+    { id: 1, name: "Fork (Dinglehopper)", emoji: "ð´", description: "Used for combing hair!", found: false },
+    { id: 2, name: "Spyglass", emoji: "ð­", description: "See far away things!", found: false },
+    { id: 3, name: "Music Box", emoji: "ðµ", description: "Plays beautiful melodies!", found: false },
+    { id: 4, name: "Statue", emoji: "ð¿", description: "A mysterious figure!", found: false },
+    { id: 5, name: "Book", emoji: "ð", description: "Full of human stories!", found: false },
+    { id: 6, name: "Crown", emoji: "ð", description: "Worn by royalty!", found: false },
+    { id: 7, name: "Compass", emoji: "ð§­", description: "Shows directions!", found: false },
+    { id: 8, name: "Bell", emoji: "ð", description: "Makes pretty sounds!", found: false },
   ];
 
   const [treasures, setTreasures] = useState(initialTreasures);
@@ -54,7 +54,7 @@ const ArielTreasure = () => {
   const allFound = treasures.every(t => t.found);
 
   return (
-    <GameLayout title="Ariel's Treasure Hunt! 🧜‍♀️">
+    <GameLayout title="Ariel's Treasure Hunt! ð§ââï¸">
       {showConfetti && <Confetti />}
 
       <div className="max-w-5xl mx-auto">
@@ -91,7 +91,7 @@ const ArielTreasure = () => {
           <div className="relative bg-gradient-to-br from-blue-200 via-cyan-100 to-teal-100 rounded-3xl border-4 border-cyan-400 p-8 min-h-[500px]">
             <div className="text-center mb-6">
               <p className="text-2xl font-bold text-cyan-700">
-                Click around to find treasures! 🐚
+                Click around to find treasures! ð
               </p>
             </div>
 
@@ -114,7 +114,7 @@ const ArielTreasure = () => {
                     </div>
                   ) : (
                     <div className="flex items-center justify-center h-full">
-                      <div className="text-7xl">🐚</div>
+                      <div className="text-7xl">ð</div>
                     </div>
                   )}
                 </button>
@@ -123,7 +123,7 @@ const ArielTreasure = () => {
           </div>
         ) : (
           <div className="text-center">
-            <div className="text-8xl mb-4 animate-bounce">🧜‍♀️</div>
+            <div className="text-8xl mb-4 animate-bounce">ð§ââï¸</div>
             <h2 className="text-5xl font-bold text-cyan-600 mb-4">
               Collection Complete!
             </h2>

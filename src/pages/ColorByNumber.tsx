@@ -104,7 +104,7 @@ const ColorByNumber = () => {
   const isComplete = grid.every((row) => row.every((cell) => cell.filled));
 
   return (
-    <GameLayout title="Color by Number 🎨">
+    <GameLayout title="Color by Number ð¨">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
           <img src={moanaImg} alt="Moana" className="w-32 h-32 object-contain mx-auto mb-4" />
@@ -114,7 +114,7 @@ const ColorByNumber = () => {
 
           {isComplete && (
             <p className="text-4xl font-bold text-success animate-bounce mb-4">
-              🎨 Beautiful! You completed it! 🎨
+              ð¨ Beautiful! You completed it! ð¨
             </p>
           )}
         </div>
@@ -181,7 +181,7 @@ const ColorByNumber = () => {
         {showPopup && (
           <CharacterPopup
             character="Moana"
-            message="You're an amazing artist! 🎨✨"
+            message="You're an amazing artist! ð¨â¨"
             image={moanaImg}
             onComplete={() => setShowPopup(false)}
           />

@@ -185,7 +185,7 @@ const ParentDashboard = () => {
                         <div>
                           <p className="font-semibold">{play.game_type}</p>
                           <p className="text-sm text-muted-foreground">
-                            {getProfileName(play.profile_id)} • {format(new Date(play.played_at), 'MMM d, h:mm a')}
+                            {getProfileName(play.profile_id)} â¢ {format(new Date(play.played_at), 'MMM d, h:mm a')}
                           </p>
                         </div>
                         {play.score !== null && (
