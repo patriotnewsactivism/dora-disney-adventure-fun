@@ -136,11 +136,11 @@ const Storytime = () => {
 
     switch (currentNode.endingType) {
       case "great":
-        return { emoji: "🏆", text: "Amazing Ending!", color: "text-yellow-600" };
+        return { emoji: "ð", text: "Amazing Ending!", color: "text-yellow-600" };
       case "good":
-        return { emoji: "⭐", text: "Great Ending!", color: "text-blue-600" };
+        return { emoji: "â­", text: "Great Ending!", color: "text-blue-600" };
       case "bad":
-        return { emoji: "😊", text: "Try Again!", color: "text-purple-600" };
+        return { emoji: "ð", text: "Try Again!", color: "text-purple-600" };
       default:
         return null;
     }
@@ -149,7 +149,7 @@ const Storytime = () => {
   const ending = getEndingMessage();
 
   return (
-    <GameLayout title="Interactive Storytime! 📚">
+    <GameLayout title="Interactive Storytime! ð">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -234,7 +234,7 @@ const Storytime = () => {
         {storiesCompleted >= 3 && (
           <div className="mt-8 text-center">
             <h3 className="text-4xl font-bold text-success mb-2">
-              🏆 Master Storyteller! 🏆
+              ð Master Storyteller! ð
             </h3>
             <p className="text-2xl text-muted-foreground">
               You've completed {storiesCompleted} adventures!

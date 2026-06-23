@@ -15,24 +15,24 @@ const DressDesigner = () => {
   ];
 
   const dressStyles = [
-    { id: "ball", name: "Ball Gown", emoji: "👗" },
-    { id: "casual", name: "Casual Dress", emoji: "👚" },
-    { id: "elegant", name: "Elegant Gown", emoji: "💃" },
+    { id: "ball", name: "Ball Gown", emoji: "ð" },
+    { id: "casual", name: "Casual Dress", emoji: "ð" },
+    { id: "elegant", name: "Elegant Gown", emoji: "ð" },
   ];
 
   const colors = [
-    { name: "Pink", value: "#ec4899", emoji: "💗" },
-    { name: "Blue", value: "#3b82f6", emoji: "💙" },
-    { name: "Purple", value: "#a855f7", emoji: "💜" },
-    { name: "Yellow", value: "#fbbf24", emoji: "💛" },
-    { name: "Green", value: "#10b981", emoji: "💚" },
+    { name: "Pink", value: "#ec4899", emoji: "ð" },
+    { name: "Blue", value: "#3b82f6", emoji: "ð" },
+    { name: "Purple", value: "#a855f7", emoji: "ð" },
+    { name: "Yellow", value: "#fbbf24", emoji: "ð" },
+    { name: "Green", value: "#10b981", emoji: "ð" },
   ];
 
   const accessories = [
-    { id: "crown", emoji: "👑", name: "Crown" },
-    { id: "necklace", emoji: "📿", name: "Necklace" },
-    { id: "flowers", emoji: "🌸", name: "Flowers" },
-    { id: "gloves", emoji: "🧤", name: "Gloves" },
+    { id: "crown", emoji: "ð", name: "Crown" },
+    { id: "necklace", emoji: "ð¿", name: "Necklace" },
+    { id: "flowers", emoji: "ð¸", name: "Flowers" },
+    { id: "gloves", emoji: "ð§¤", name: "Gloves" },
   ];
 
   const [selectedCharacter, setSelectedCharacter] = useState(characters[0]);
@@ -61,7 +61,7 @@ const DressDesigner = () => {
   };
 
   return (
-    <GameLayout title="Dress Designer! 👗">
+    <GameLayout title="Dress Designer! ð">
       {showConfetti && <Confetti />}
 
       <div className="max-w-6xl mx-auto">
@@ -192,7 +192,7 @@ const DressDesigner = () => {
         {designsCreated >= 5 && (
           <div className="mt-6 text-center">
             <h3 className="text-4xl font-bold text-pink-600 mb-2">
-              🎨 Master Designer! 🎨
+              ð¨ Master Designer! ð¨
             </h3>
             <p className="text-2xl text-muted-foreground">
               You've created {designsCreated} beautiful designs!

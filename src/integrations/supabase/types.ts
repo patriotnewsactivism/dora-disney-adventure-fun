@@ -149,6 +149,45 @@ export type Database = {
         }
         Relationships: []
       }
+      memory_game_sessions: {
+        Row: {
+          game_id: string
+          host_id: string
+          player_ids: string[]
+          game_state: Json
+          current_player_id: string
+          player_scores: Json
+          status: string
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          game_id: string
+          host_id: string
+          player_ids: string[]
+          game_state: Json
+          current_player_id: string
+          player_scores: Json
+          status: string
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          game_id?: string
+          host_id?: string
+          player_ids?: string[]
+          game_state?: Json
+          current_player_id?: string
+          player_scores?: Json
+          status?: string
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

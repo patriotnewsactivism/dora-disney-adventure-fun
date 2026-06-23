@@ -115,7 +115,7 @@ const PuzzleSlide = () => {
   };
 
   return (
-    <GameLayout title="Puzzle Slide! 🧩">
+    <GameLayout title="Puzzle Slide! ð§©">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -188,7 +188,7 @@ const PuzzleSlide = () => {
           {isSolved && (
             <div className="animate-bounce mb-6">
               <h2 className="text-5xl font-bold text-success mb-2">
-                🏆 Puzzle Solved! 🏆
+                ð Puzzle Solved! ð
               </h2>
               <p className="text-2xl text-muted-foreground">
                 You solved it in {moves} moves!

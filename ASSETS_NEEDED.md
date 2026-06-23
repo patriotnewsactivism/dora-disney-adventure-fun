@@ -26,7 +26,7 @@ The following character image assets should be added to `src/assets/`:
 
 ## Temporary Workaround
 Until these assets are added, games will use:
-- Emoji representations (🚙 for trucks, 🕷️ for Spider-Man, etc.)
+- Emoji representations (ð for trucks, ð·ï¸ for Spider-Man, etc.)
 - Colored geometric shapes as placeholders
 - Existing Disney character images where appropriate
 

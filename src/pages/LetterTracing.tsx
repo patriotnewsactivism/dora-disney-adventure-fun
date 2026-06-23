@@ -131,7 +131,7 @@ const LetterTracing = () => {
   };
 
   return (
-    <GameLayout title="Letter Tracing! ✏️">
+    <GameLayout title="Letter Tracing! âï¸">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -180,14 +180,14 @@ const LetterTracing = () => {
         {completed && (
           <div className="text-center mb-4">
             <p className="text-4xl font-bold text-success animate-bounce">
-              🌟 Great Job! 🌟
+              ð Great Job! ð
             </p>
           </div>
         )}
 
         <div className="flex gap-4 justify-center flex-wrap">
           <Button onClick={checkCompletion} size="lg" className="text-xl px-8 py-6">
-            ✓ Done Tracing!
+            â Done Tracing!
           </Button>
 
           <Button onClick={nextLetter} size="lg" variant="secondary" className="text-xl px-8 py-6">
@@ -208,7 +208,7 @@ const LetterTracing = () => {
         {score >= 5 && (
           <div className="mt-6 text-center">
             <h3 className="text-4xl font-bold text-success mb-2">
-              🏆 Letter Master! 🏆
+              ð Letter Master! ð
             </h3>
             <p className="text-2xl text-muted-foreground">
               You've traced {score} letters!

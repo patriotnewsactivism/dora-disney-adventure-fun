@@ -60,7 +60,7 @@ const FrozenIceQuest = () => {
   };
 
   return (
-    <GameLayout title="Frozen Ice Quest! ❄️">
+    <GameLayout title="Frozen Ice Quest! âï¸">
       {showConfetti && <Confetti />}
 
       <div className="max-w-6xl mx-auto">
@@ -93,7 +93,7 @@ const FrozenIceQuest = () => {
           <>
             <div className="mb-4 text-center">
               <p className="text-2xl font-bold text-cyan-600">
-                Found: {foundSnowflakes.length} / {totalSnowflakes} ❄️
+                Found: {foundSnowflakes.length} / {totalSnowflakes} âï¸
               </p>
             </div>
 
@@ -109,7 +109,7 @@ const FrozenIceQuest = () => {
                   }`}
                   style={{ top: `${pos.top}%`, left: `${pos.left}%` }}
                 >
-                  ❄️
+                  âï¸
                 </button>
               ))}
 
@@ -124,7 +124,7 @@ const FrozenIceQuest = () => {
 
         {gameState === "won" && (
           <div className="text-center">
-            <div className="text-8xl mb-4 animate-bounce">❄️</div>
+            <div className="text-8xl mb-4 animate-bounce">âï¸</div>
             <h2 className="text-5xl font-bold text-cyan-600 mb-4">
               You Found Them All!
             </h2>
@@ -149,7 +149,7 @@ const FrozenIceQuest = () => {
 
         {gameState === "lost" && (
           <div className="text-center">
-            <div className="text-8xl mb-4">⏰</div>
+            <div className="text-8xl mb-4">â°</div>
             <h2 className="text-5xl font-bold text-orange-600 mb-4">
               Time's Up!
             </h2>

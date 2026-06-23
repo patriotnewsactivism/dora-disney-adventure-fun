@@ -13,5 +13,67 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
     storage: localStorage,
     persistSession: true,
     autoRefreshToken: true,
+  },
+  realtime: {
+    heartbeatIntervalMs: 10000, // 10 seconds
+    timeoutMs: 30000, // 30 seconds
+    reconnect: true,
+    reconnectMaxAttempts: 3,
+    reconnectIntervalMs: 5000 // 5 seconds
   }
 });
+
+// Secure subscription wrapper
+interface SubscriptionOptions {
+  table: string;
+  filter?: string;
+  callback: (payload: any) => void;
+}
+
+export const secureSubscribe = async (options: SubscriptionOptions) => {
+  const { table, filter, callback } = options;
+
+  // Validate table name against allowed list
+  const allowedTables = ['memory_game_sessions'];
+  if (!allowedTables.includes(table)) {
+    throw new Error(`Subscription to table ${table} is not allowed`);
+  }
+
+  // Create subscription
+  const subscription = supabase
+    .channel('custom-all-channel')
+    .on(
+      'postgres_changes',
+      { 
+        event: '*',
+        schema: 'public',
+        table: table,
+        filter: filter
+      },
+      callback
+    )
+    .subscribe();
+
+  // Return cleanup function
+  return () => {
+    subscription.unsubscribe();
+  };
+};
+
+export const validateSessionState = (state: any) => {
+  const requiredFields = ['game_id', 'host_id', 'player_ids', 'game_state', 'current_player_id'];
+  const missingFields = requiredFields.filter(field => !(field in state));
+  if (missingFields.length > 0) {
+    throw new Error(`Invalid session state: Missing fields ${missingFields.join(', ')}`);
+  }
+
+  if (!Array.isArray(state.player_ids)) {
+    throw new Error('Invalid session state: player_ids must be an array');
+  }
+
+  if (typeof state.game_state !== 'object') {
+    throw new Error('Invalid session state: game_state must be an object');
+  }
+
+  return true;
+};

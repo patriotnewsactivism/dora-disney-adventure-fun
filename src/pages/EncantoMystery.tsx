@@ -16,12 +16,12 @@ interface Door {
 
 const EncantoMystery = () => {
   const initialDoors: Door[] = [
-    { id: 1, gift: "Super Strength", emoji: "💪", riddle: "I can lift anything, no matter how heavy!", opened: false },
-    { id: 2, gift: "Healing", emoji: "🌺", riddle: "I make people feel better with food!", opened: false },
-    { id: 3, gift: "Weather Control", emoji: "⛈️", riddle: "My emotions change the weather!", opened: false },
-    { id: 4, gift: "Shape Shifting", emoji: "🦎", riddle: "I can look like anyone!", opened: false },
-    { id: 5, gift: "Perfect Hearing", emoji: "👂", riddle: "I can hear everything, even whispers!", opened: false },
-    { id: 6, gift: "Talking to Animals", emoji: "🐾", riddle: "Animals tell me their secrets!", opened: false },
+    { id: 1, gift: "Super Strength", emoji: "ðª", riddle: "I can lift anything, no matter how heavy!", opened: false },
+    { id: 2, gift: "Healing", emoji: "ðº", riddle: "I make people feel better with food!", opened: false },
+    { id: 3, gift: "Weather Control", emoji: "âï¸", riddle: "My emotions change the weather!", opened: false },
+    { id: 4, gift: "Shape Shifting", emoji: "ð¦", riddle: "I can look like anyone!", opened: false },
+    { id: 5, gift: "Perfect Hearing", emoji: "ð", riddle: "I can hear everything, even whispers!", opened: false },
+    { id: 6, gift: "Talking to Animals", emoji: "ð¾", riddle: "Animals tell me their secrets!", opened: false },
   ];
 
   const [doors, setDoors] = useState(initialDoors);
@@ -55,7 +55,7 @@ const EncantoMystery = () => {
   const allDoorsOpened = doors.every(d => d.opened);
 
   return (
-    <GameLayout title="Encanto Mystery Doors! 🚪">
+    <GameLayout title="Encanto Mystery Doors! ðª">
       {showConfetti && <Confetti />}
 
       <div className="max-w-5xl mx-auto">
@@ -116,7 +116,7 @@ const EncantoMystery = () => {
                     </div>
                   ) : (
                     <div className="flex flex-col items-center justify-center h-full">
-                      <div className="text-8xl mb-2">🚪</div>
+                      <div className="text-8xl mb-2">ðª</div>
                       <Sparkles className="h-8 w-8 text-yellow-300 animate-pulse" />
                     </div>
                   )}
@@ -129,7 +129,7 @@ const EncantoMystery = () => {
             <div className="flex items-center justify-center gap-4 mb-6">
               <img src={belleImg} alt="Character" className="w-24 h-24 object-contain" />
               <div>
-                <div className="text-8xl mb-2">🎊</div>
+                <div className="text-8xl mb-2">ð</div>
                 <h2 className="text-5xl font-bold text-yellow-600 mb-2">
                   All Gifts Revealed!
                 </h2>

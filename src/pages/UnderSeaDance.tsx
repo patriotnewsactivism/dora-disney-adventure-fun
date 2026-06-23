@@ -28,11 +28,11 @@ const UnderSeaDance = () => {
   };
 
   return (
-    <GameLayout title="Under the Sea Dance! 🐠">
+    <GameLayout title="Under the Sea Dance! ð ">
       {showConfetti && <Confetti />}
       <div className="max-w-4xl mx-auto text-center">
-        <div className="text-8xl mb-4 animate-bounce">🧜‍♀️</div>
-        <h2 className="text-4xl font-bold mb-4">{freezeTime ? "FREEZE! ❄️" : "DANCE! 💃"}</h2>
+        <div className="text-8xl mb-4 animate-bounce">ð§ââï¸</div>
+        <h2 className="text-4xl font-bold mb-4">{freezeTime ? "FREEZE! âï¸" : "DANCE! ð"}</h2>
         <div className="bg-gradient-to-b from-blue-300 to-cyan-200 rounded-3xl p-8 mb-6 min-h-[300px] flex items-center justify-center">
           <p className="text-3xl">{freezeTime ? "Don't move!" : "Keep dancing!"}</p>
         </div>

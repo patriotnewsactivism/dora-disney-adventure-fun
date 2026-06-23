@@ -24,11 +24,11 @@ const DrawingPad = () => {
     { image: mickeyImg, name: "Mickey" },
     { image: elsaImg, name: "Elsa" },
     { image: moanaImg, name: "Moana" },
-    { emoji: "⭐", name: "Star" },
-    { emoji: "❤️", name: "Heart" },
-    { emoji: "🌈", name: "Rainbow" },
-    { emoji: "🌸", name: "Flower" },
-    { emoji: "🦋", name: "Butterfly" },
+    { emoji: "â­", name: "Star" },
+    { emoji: "â¤ï¸", name: "Heart" },
+    { emoji: "ð", name: "Rainbow" },
+    { emoji: "ð¸", name: "Flower" },
+    { emoji: "ð¦", name: "Butterfly" },
   ];
 
   useEffect(() => {
@@ -129,7 +129,7 @@ const DrawingPad = () => {
   };
 
   return (
-    <GameLayout title="Drawing Pad! 🎨">
+    <GameLayout title="Drawing Pad! ð¨">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-primary mb-2">
@@ -195,7 +195,7 @@ const DrawingPad = () => {
                 className="w-full text-lg"
                 variant={showStamps ? "default" : "outline"}
               >
-                ✨ Stamps & Stickers
+                â¨ Stamps & Stickers
               </Button>
               {showStamps && (
                 <div className="grid grid-cols-3 gap-2 mt-4">

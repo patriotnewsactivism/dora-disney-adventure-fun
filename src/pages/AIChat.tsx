@@ -25,25 +25,25 @@ const characterConfig = {
   minnie: { 
     name: "Minnie Mouse", 
     img: minnieImg, 
-    greeting: "Oh boy! Hi there! I'm Minnie Mouse! How wonderful to meet you! What would you like to talk about today? 🎀✨",
+    greeting: "Oh boy! Hi there! I'm Minnie Mouse! How wonderful to meet you! What would you like to talk about today? ðâ¨",
     color: "pink"
   },
   mickey: { 
     name: "Mickey Mouse", 
     img: mickeyImg, 
-    greeting: "Hot dog! Hey there pal! I'm Mickey Mouse! Gosh, it's great to meet you! What adventure should we go on today? 🎩✨",
+    greeting: "Hot dog! Hey there pal! I'm Mickey Mouse! Gosh, it's great to meet you! What adventure should we go on today? ð©â¨",
     color: "red"
   },
   elsa: { 
     name: "Elsa", 
     img: elsaImg, 
-    greeting: "Hello! I'm Elsa from Arendelle! It's wonderful to meet you! Let's discover something magical together today! ❄️✨",
+    greeting: "Hello! I'm Elsa from Arendelle! It's wonderful to meet you! Let's discover something magical together today! âï¸â¨",
     color: "blue"
   },
   moana: { 
     name: "Moana", 
     img: moanaImg, 
-    greeting: "Aloha! I'm Moana! The ocean called me, and I'm so happy to meet you! Ready for an adventure? 🌊✨",
+    greeting: "Aloha! I'm Moana! The ocean called me, and I'm so happy to meet you! Ready for an adventure? ðâ¨",
     color: "teal"
   }
 };
@@ -195,7 +195,7 @@ const AIChat = () => {
         () => {
           setIsConnected(true);
           toast({
-            title: `Connected! ${character.color === 'pink' ? '🎀' : character.color === 'red' ? '🎩' : character.color === 'blue' ? '❄️' : '🌊'}`,
+            title: `Connected! ${character.color === 'pink' ? 'ð' : character.color === 'red' ? 'ð©' : character.color === 'blue' ? 'âï¸' : 'ð'}`,
             description: `${character.name} is ready to chat with you!`,
           });
         },
@@ -283,7 +283,7 @@ const AIChat = () => {
                 character.color === 'blue' ? 'text-blue-600 dark:text-blue-400' :
                 'text-teal-600 dark:text-teal-400'
               }`}>Talk to {character.name}!</h1>
-              <p className="text-sm text-muted-foreground">Real-time voice conversation ✨</p>
+              <p className="text-sm text-muted-foreground">Real-time voice conversation â¨</p>
             </div>
           </div>
           <Link to="/">
@@ -328,9 +328,9 @@ const AIChat = () => {
                 <div className="space-y-4">
                   <p className="text-xl text-muted-foreground">
                     Click the button below to start talking with {character.name}! {
-                      character.color === 'pink' ? '🎀' : 
-                      character.color === 'red' ? '🎩' : 
-                      character.color === 'blue' ? '❄️' : '🌊'
+                      character.color === 'pink' ? 'ð' : 
+                      character.color === 'red' ? 'ð©' : 
+                      character.color === 'blue' ? 'âï¸' : 'ð'
                     }
                   </p>
                   <Button 
@@ -369,7 +369,7 @@ const AIChat = () => {
                     )}
                     {!isListening && !isSpeaking && (
                       <div className="text-muted-foreground">
-                        <span>Connected - Just start talking! 🎤</span>
+                        <span>Connected - Just start talking! ð¤</span>
                       </div>
                     )}
                   </div>

@@ -23,10 +23,10 @@ const BigWheelsStunt = () => {
   const gameLoopRef = useRef<NodeJS.Timeout | null>(null);
 
   const obstacleTypes = [
-    { type: "cone", emoji: "🚧" },
-    { type: "rock", emoji: "🪨" },
-    { type: "puddle", emoji: "💧" },
-    { type: "flower", emoji: "🌸" },
+    { type: "cone", emoji: "ð§" },
+    { type: "rock", emoji: "ðª¨" },
+    { type: "puddle", emoji: "ð§" },
+    { type: "flower", emoji: "ð¸" },
   ];
 
   useEffect(() => {
@@ -118,7 +118,7 @@ const BigWheelsStunt = () => {
   }, [gameOver]);
 
   return (
-    <GameLayout title="Big Wheels Stunt Course! 🚲">
+    <GameLayout title="Big Wheels Stunt Course! ð²">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -176,7 +176,7 @@ const BigWheelsStunt = () => {
             }}
           >
             <div className="text-7xl">
-              🚲
+              ð²
             </div>
           </div>
 
@@ -190,7 +190,7 @@ const BigWheelsStunt = () => {
           {gameOver && (
             <div className="text-center">
               <h2 className="text-4xl font-bold text-destructive mb-2">
-                {score > 500 ? "🏆 Great Run! 🏆" : "Crash! Try Again!"}
+                {score > 500 ? "ð Great Run! ð" : "Crash! Try Again!"}
               </h2>
               <p className="text-2xl text-muted-foreground">
                 Final Score: {score} | Level: {level}

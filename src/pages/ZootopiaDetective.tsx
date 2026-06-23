@@ -76,7 +76,7 @@ const ZootopiaDetective = () => {
   };
 
   return (
-    <GameLayout title="Zootopia Detective! 🔍">
+    <GameLayout title="Zootopia Detective! ð">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -98,7 +98,7 @@ const ZootopiaDetective = () => {
         </div>
 
         <div className="bg-gradient-to-br from-orange-100 to-yellow-100 rounded-3xl border-4 border-orange-400 p-8 mb-6">
-          <div className="text-7xl text-center mb-4">🕵️</div>
+          <div className="text-7xl text-center mb-4">ðµï¸</div>
           <h3 className="text-3xl font-bold text-center text-orange-700 mb-6">
             Case #{currentCase + 1}: {case_data.mystery}
           </h3>
@@ -117,7 +117,7 @@ const ZootopiaDetective = () => {
                 <ul className="space-y-3">
                   {case_data.clues.map((clue, index) => (
                     <li key={index} className="text-xl flex items-start gap-3">
-                      <span className="text-3xl">🔎</span>
+                      <span className="text-3xl">ð</span>
                       <span>{clue}</span>
                     </li>
                   ))}
@@ -149,7 +149,7 @@ const ZootopiaDetective = () => {
               {showResult && selectedSuspect === case_data.correct && (
                 <div className="mt-6 text-center">
                   <p className="text-4xl font-bold text-success animate-bounce">
-                    🎉 Case Solved! 🎉
+                    ð Case Solved! ð
                   </p>
                 </div>
               )}
@@ -180,7 +180,7 @@ const ZootopiaDetective = () => {
         {casesSolved === cases.length && (
           <div className="mt-8 text-center">
             <h3 className="text-5xl font-bold text-orange-600 mb-2">
-              🏆 Master Detective! 🏆
+              ð Master Detective! ð
             </h3>
             <p className="text-3xl text-muted-foreground">
               You solved all {casesSolved} cases!

@@ -32,7 +32,7 @@ npm preview
 
 ### Core Application Structure
 
-- **Entry Point**: `src/main.tsx` → `src/App.tsx`
+- **Entry Point**: `src/main.tsx` â `src/App.tsx`
 - **Routing**: React Router with BrowserRouter, all routes defined in App.tsx
 - **State Management**: React Context API (`ProfileContext`) for user profile management
 - **Data Layer**: Supabase client at `src/integrations/supabase/client.ts`
@@ -203,7 +203,7 @@ Custom routes MUST be added above the catch-all `*` route in App.tsx to avoid 40
 This project is managed by Lovable:
 - Changes made in Lovable automatically commit to repo
 - Component tagging enabled in development mode via `lovable-tagger`
-- Deploy via Lovable dashboard (Share → Publish)
+- Deploy via Lovable dashboard (Share â Publish)
 
 ### Key Technical Patterns
 
