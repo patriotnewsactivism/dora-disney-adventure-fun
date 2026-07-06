@@ -186,7 +186,7 @@ export class RealtimeVoiceChat {
   }
 
   async connect() {
-    const WS_URL = `wss://qlfkjfcgjlavpxjwcvmc.supabase.co/functions/v1/realtime-voice?character=${this.character}`;
+    const WS_URL = `wss://lyenqagnztiwgszrythb.supabase.co/functions/v1/realtime-voice?character=${this.character}`;
     
     this.ws = new WebSocket(WS_URL);
     this.audioContext = new AudioContext({ sampleRate: 24000 });
