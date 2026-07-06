@@ -15,10 +15,10 @@ interface Shape {
 
 const ShapeSorter = () => {
   const shapes: Shape[] = [
-    { id: "circle", type: "circle", color: "#ef4444", emoji: "ð´" },
-    { id: "square", type: "square", color: "#3b82f6", emoji: "ð¦" },
-    { id: "triangle", type: "triangle", color: "#22c55e", emoji: "ðº" },
-    { id: "star", type: "star", color: "#eab308", emoji: "â­" },
+    { id: "circle", type: "circle", color: "#ef4444", emoji: "🔴" },
+    { id: "square", type: "square", color: "#3b82f6", emoji: "🟦" },
+    { id: "triangle", type: "triangle", color: "#22c55e", emoji: "🔺" },
+    { id: "star", type: "star", color: "#eab308", emoji: "⭐" },
   ];
 
   const [draggingShape, setDraggingShape] = useState<Shape | null>(null);
@@ -66,7 +66,7 @@ const ShapeSorter = () => {
   };
 
   return (
-    <GameLayout title="Shape Sorter! ð·">
+    <GameLayout title="Shape Sorter! 🔷">
       {showConfetti && <Confetti />}
 
       <div className="max-w-5xl mx-auto">
@@ -112,10 +112,10 @@ const ShapeSorter = () => {
                     <div className="w-32 h-32 border-8 border-gray-400"></div>
                   )}
                   {shape.type === "triangle" && (
-                    <div className="text-9xl text-gray-400">â³</div>
+                    <div className="text-9xl text-gray-400">△</div>
                   )}
                   {shape.type === "star" && (
-                    <div className="text-9xl text-gray-400">â</div>
+                    <div className="text-9xl text-gray-400">★</div>
                   )}
                 </div>
 
@@ -165,7 +165,7 @@ const ShapeSorter = () => {
         {Object.keys(placedShapes).length === shapes.length && (
           <div className="text-center mb-6">
             <p className="text-4xl font-bold text-success animate-bounce mb-4">
-              ð Perfect Match! ð
+              🎉 Perfect Match! 🎉
             </p>
             <p className="text-2xl text-muted-foreground">
               All shapes sorted correctly!
@@ -184,7 +184,7 @@ const ShapeSorter = () => {
         {score >= 10 && (
           <div className="mt-6 text-center">
             <h3 className="text-4xl font-bold text-success mb-2">
-              ð Shape Master! ð
+              🏆 Shape Master! 🏆
             </h3>
             <p className="text-2xl text-muted-foreground">
               You've sorted {score} shapes!

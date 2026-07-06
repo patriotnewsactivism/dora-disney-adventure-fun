@@ -3,7 +3,7 @@ import MemoryGame from '../components/MemoryGame';
 import CharacterPopup from '../components/CharacterPopup';
 import Confetti from '../components/Confetti';
 import { useProfile } from '../contexts/ProfileContext';
-import { AchievementPopup } from '../components/AchievementPopup';
+import AchievementPopup from '../components/AchievementPopup';
 import { achievements } from '../data/achievements';
 import { Achievement } from '../data/achievements';
 

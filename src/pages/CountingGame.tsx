@@ -18,7 +18,7 @@ const CountingGame = () => {
   const [showConfetti, setShowConfetti] = useState(false);
 
   const characters = [mickeyImg, minnieImg, elsaImg, annaImg];
-  const emojis = ["ð", "ð", "ð", "ð§", "ð", "ðº"];
+  const emojis = ["🌟", "🎈", "🎁", "🧁", "🍎", "🌺"];
 
   const [currentCharacter, setCurrentCharacter] = useState(characters[0]);
   const [currentEmoji, setCurrentEmoji] = useState(emojis[0]);
@@ -81,7 +81,7 @@ const CountingGame = () => {
   }
 
   return (
-    <GameLayout title="Counting Fun! ð¢">
+    <GameLayout title="Counting Fun! 🔢">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -150,7 +150,7 @@ const CountingGame = () => {
         <div className="text-center space-y-4">
           {isCorrect === true && (
             <p className="text-4xl font-bold text-success animate-bounce">
-              â­ Correct! Great job! â­
+              ⭐ Correct! Great job! ⭐
             </p>
           )}
 
@@ -163,7 +163,7 @@ const CountingGame = () => {
           {score >= 10 && (
             <div className="mb-4">
               <h2 className="text-5xl font-bold text-success mb-2">
-                ð Amazing Counter! ð
+                🏆 Amazing Counter! 🏆
               </h2>
               <p className="text-2xl text-muted-foreground">
                 You've counted {score} correctly!

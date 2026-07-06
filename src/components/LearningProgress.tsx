@@ -76,7 +76,7 @@ const LearningProgress = ({ profileId }: LearningProgressProps) => {
             <div className="flex flex-wrap gap-2">
               {milestones.map((milestone, idx) => (
                 <Badge key={idx} variant="secondary" className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100">
-                  ð {milestone}
+                  🌟 {milestone}
                 </Badge>
               ))}
             </div>

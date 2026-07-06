@@ -5,7 +5,7 @@ import { RotateCcw } from "lucide-react";
 import Confetti from "@/components/Confetti";
 
 const DisneyEmojiQuest = () => {
-  const emojis = ["ð¸", "ð§", "ð¦", "ð ", "âï¸", "ð°"];
+  const emojis = ["👸", "🧚", "🦁", "🐠", "❄️", "🏰"];
   const [grid, setGrid] = useState<string[]>([]);
   const [score, setScore] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -39,7 +39,7 @@ const DisneyEmojiQuest = () => {
   };
 
   return (
-    <GameLayout title="Disney Emoji Quest! ð">
+    <GameLayout title="Disney Emoji Quest! 😊">
       {showConfetti && <Confetti />}
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-4">Match the Emojis!</h2>

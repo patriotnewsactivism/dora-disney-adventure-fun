@@ -232,6 +232,71 @@ export type Database = {
           }
         ]
       }
+      video_calls: {
+        Row: {
+          id: string
+          slug: string
+          profile_id: string | null
+          child_name: string | null
+          initiated_by: string
+          status: string
+          created_at: string
+          answered_at: string | null
+          ended_at: string | null
+          expires_at: string
+        }
+        Insert: {
+          id?: string
+          slug?: string
+          profile_id?: string | null
+          child_name?: string | null
+          initiated_by: string
+          status?: string
+          created_at?: string
+          answered_at?: string | null
+          ended_at?: string | null
+          expires_at?: string
+        }
+        Update: {
+          id?: string
+          slug?: string
+          profile_id?: string | null
+          child_name?: string | null
+          initiated_by?: string
+          status?: string
+          created_at?: string
+          answered_at?: string | null
+          ended_at?: string | null
+          expires_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_calls_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      app_config: {
+        Row: {
+          id: number
+          family_code: Json
+          updated_at: string
+        }
+        Insert: {
+          id?: number
+          family_code?: Json
+          updated_at?: string
+        }
+        Update: {
+          id?: number
+          family_code?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

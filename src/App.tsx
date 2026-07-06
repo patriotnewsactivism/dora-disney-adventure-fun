@@ -13,7 +13,10 @@ import Checkers from "./pages/Checkers";
 import ColorByNumber from "./pages/ColorByNumber";
 import AIChat from "./pages/AIChat";
 import ParentDashboard from "./pages/ParentDashboard";
+import VideoCall from "./pages/VideoCall";
 import NotFound from "./pages/NotFound";
+import IncomingCallOverlay from "./components/IncomingCallOverlay";
+import FamilyGate from "./components/FamilyGate";
 
 // New Games - Ethan (Age 3)
 import MonsterTruckRacing from "./pages/MonsterTruckRacing";
@@ -72,7 +75,9 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <FamilyGate>
         <ProfileProvider>
+          <IncomingCallOverlay />
           <Routes>
             <Route path="/" element={<ProfileSelect />} />
             <Route path="/home" element={<Home />} />
@@ -85,6 +90,7 @@ const App = () => (
             <Route path="/coloring" element={<ColorByNumber />} />
             <Route path="/aichat" element={<AIChat />} />
             <Route path="/parent-dashboard" element={<ParentDashboard />} />
+            <Route path="/call/:slug" element={<VideoCall />} />
 
             {/* Ethan's Games (Age 3) */}
             <Route path="/monster-truck-racing" element={<MonsterTruckRacing />} />
@@ -139,6 +145,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ProfileProvider>
+        </FamilyGate>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

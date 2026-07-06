@@ -124,7 +124,7 @@ const SpiderManWebSling = () => {
   const hasWon = spideyX >= 100;
 
   return (
-    <GameLayout title="Spider-Man Web Slinging! ð·ï¸">
+    <GameLayout title="Spider-Man Web Slinging! 🕷️">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -155,11 +155,11 @@ const SpiderManWebSling = () => {
           )}
         >
           {/* Sun */}
-          <div className="absolute top-4 right-4 text-6xl">âï¸</div>
+          <div className="absolute top-4 right-4 text-6xl">☀️</div>
 
           {/* Clouds */}
-          <div className="absolute top-8 left-1/4 text-4xl opacity-50">âï¸</div>
-          <div className="absolute top-16 right-1/3 text-4xl opacity-50">âï¸</div>
+          <div className="absolute top-8 left-1/4 text-4xl opacity-50">☁️</div>
+          <div className="absolute top-16 right-1/3 text-4xl opacity-50">☁️</div>
 
           {/* Buildings */}
           {buildings.map(building => (
@@ -194,7 +194,7 @@ const SpiderManWebSling = () => {
               "text-6xl transition-transform",
               isSwinging && "rotate-45"
             )}>
-              ð·ï¸
+              🕷️
             </div>
             {isSwinging && (
               <div className="absolute -top-20 left-1/2 w-0.5 h-20 bg-white" />
@@ -210,7 +210,7 @@ const SpiderManWebSling = () => {
           {hasWon && (
             <div className="animate-bounce">
               <h2 className="text-5xl font-bold text-success mb-2">
-                ð Amazing! ð
+                🏆 Amazing! 🏆
               </h2>
               <p className="text-2xl text-muted-foreground">
                 You made it across the city! Score: {Math.floor(score / 10)}
@@ -231,7 +231,7 @@ const SpiderManWebSling = () => {
 
           {!gameOver && (
             <p className="text-2xl text-primary font-bold animate-pulse">
-              Tap to Swing! ð¸ï¸
+              Tap to Swing! 🕸️
             </p>
           )}
 

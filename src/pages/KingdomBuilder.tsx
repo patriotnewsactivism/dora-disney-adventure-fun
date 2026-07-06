@@ -5,10 +5,10 @@ import Confetti from "@/components/Confetti";
 
 const KingdomBuilder = () => {
   const buildings = [
-    { id: "castle", emoji: "ð°", name: "Castle", points: 10 },
-    { id: "house", emoji: "ð ", name: "House", points: 5 },
-    { id: "tree", emoji: "ð³", name: "Tree", points: 3 },
-    { id: "fountain", emoji: "â²", name: "Fountain", points: 7 },
+    { id: "castle", emoji: "🏰", name: "Castle", points: 10 },
+    { id: "house", emoji: "🏠", name: "House", points: 5 },
+    { id: "tree", emoji: "🌳", name: "Tree", points: 3 },
+    { id: "fountain", emoji: "⛲", name: "Fountain", points: 7 },
   ];
 
   const [placed, setPlaced] = useState<string[]>([]);
@@ -25,7 +25,7 @@ const KingdomBuilder = () => {
   };
 
   return (
-    <GameLayout title="Kingdom Builder! ð°">
+    <GameLayout title="Kingdom Builder! 🏰">
       {showConfetti && <Confetti />}
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-6">

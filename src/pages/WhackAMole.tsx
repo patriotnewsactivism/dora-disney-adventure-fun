@@ -98,7 +98,7 @@ const WhackAMole = () => {
   };
 
   return (
-    <GameLayout title="Whack-A-Character! ð¯">
+    <GameLayout title="Whack-A-Character! 🎯">
       {showConfetti && <Confetti />}
 
       <div className="max-w-3xl mx-auto">
@@ -158,7 +158,7 @@ const WhackAMole = () => {
           {!gameActive && timeLeft === 0 && (
             <div>
               <h2 className="text-5xl font-bold text-success mb-2">
-                {score > 15 ? "ð Awesome! ð" : "â­ Good Try! â­"}
+                {score > 15 ? "🏆 Awesome! 🏆" : "⭐ Good Try! ⭐"}
               </h2>
               <p className="text-2xl text-muted-foreground">
                 Final Score: {score}
@@ -174,7 +174,7 @@ const WhackAMole = () => {
 
           {gameActive && (
             <p className="text-2xl text-primary font-bold animate-pulse">
-              Tap Them Quick! ð
+              Tap Them Quick! 👆
             </p>
           )}
 

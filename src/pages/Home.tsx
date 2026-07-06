@@ -1,12 +1,38 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle, Users } from "lucide-react";
+import { Brain, Grid3x3, Pencil, CircleDot, Palette, MessageCircle, Users, Video, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { createCallSession } from "@/utils/callActions";
+import { useToast } from "@/hooks/use-toast";
 import { useProfile } from "@/contexts/ProfileContext";
 
 const Home = () => {
   const { currentProfile } = useProfile();
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const [callingParent, setCallingParent] = useState(false);
+
+  const handleCallParent = async () => {
+    if (!currentProfile) return;
+    setCallingParent(true);
+    try {
+      const slug = await createCallSession({
+        profileId: currentProfile.id,
+        childName: currentProfile.name,
+        initiatedBy: "child",
+      });
+      navigate(`/call/${slug}?role=host&name=${encodeURIComponent(currentProfile.name)}`);
+    } catch (err) {
+      console.error(err);
+      toast({
+        title: "Uh oh!",
+        description: "Couldn't start the call. Try again in a moment.",
+        variant: "destructive",
+      });
+      setCallingParent(false);
+    }
+  };
   
   const allGames = [
     // Original Games
@@ -390,11 +416,11 @@ const Home = () => {
         <div className="flex justify-between items-center mb-8">
           <div className="text-center flex-1">
             <h1 className="text-6xl md:text-7xl font-bold mb-4 text-primary animate-bounce">
-              ð® Disney Games Hub! ð®
+              🎮 Disney Games Hub! 🎮
             </h1>
             {currentProfile && (
               <p className="text-2xl text-muted-foreground">
-                Welcome back, {currentProfile.name}! ð
+                Welcome back, {currentProfile.name}! 🌟
               </p>
             )}
             <p className="text-xl text-muted-foreground">
@@ -408,6 +434,25 @@ const Home = () => {
             </Button>
           </Link>
         </div>
+
+        {currentProfile && (
+          <div className="max-w-6xl mx-auto mb-8">
+            <button
+              onClick={handleCallParent}
+              disabled={callingParent}
+              className="w-full rounded-3xl p-6 bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 transition-colors shadow-xl flex items-center justify-center gap-4 disabled:opacity-70"
+            >
+              {callingParent ? (
+                <Loader2 className="h-10 w-10 text-white animate-spin" />
+              ) : (
+                <Video className="h-10 w-10 text-white" />
+              )}
+              <span className="text-2xl md:text-3xl font-bold text-white">
+                {callingParent ? "Calling..." : "📞 Call Mom or Dad!"}
+              </span>
+            </button>
+          </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {games.map((game) => {

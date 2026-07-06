@@ -23,11 +23,11 @@ const BuildKingdom = () => {
   ];
 
   const tools = [
-    { id: "castle", emoji: "ð°", name: "Castle" },
-    { id: "tower", emoji: "ð¼", name: "Tower" },
-    { id: "flag", emoji: "ð©", name: "Flag" },
-    { id: "tree", emoji: "ð³", name: "Tree" },
-    { id: "cloud", emoji: "âï¸", name: "Cloud" },
+    { id: "castle", emoji: "🏰", name: "Castle" },
+    { id: "tower", emoji: "🗼", name: "Tower" },
+    { id: "flag", emoji: "🚩", name: "Flag" },
+    { id: "tree", emoji: "🌳", name: "Tree" },
+    { id: "cloud", emoji: "☁️", name: "Cloud" },
   ];
 
   const drawOnCanvas = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -89,7 +89,7 @@ const BuildKingdom = () => {
   }
 
   return (
-    <GameLayout title="Build a Kingdom! ð°">
+    <GameLayout title="Build a Kingdom! 🏰">
       {showConfetti && <Confetti />}
 
       <div className="max-w-6xl mx-auto">

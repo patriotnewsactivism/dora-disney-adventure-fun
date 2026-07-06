@@ -64,7 +64,7 @@ const MagicCarpet = () => {
   };
 
   return (
-    <GameLayout title="Magic Carpet! ð§">
+    <GameLayout title="Magic Carpet! 🧞">
       {showConfetti && <Confetti />}
 
       <div className="max-w-4xl mx-auto">
@@ -82,7 +82,7 @@ const MagicCarpet = () => {
                 className="absolute left-[10%] text-6xl transition-all duration-100"
                 style={{ top: `${position}%` }}
               >
-                ð§
+                🧞
               </div>
 
               {obstacles.map(obs => (
@@ -94,23 +94,23 @@ const MagicCarpet = () => {
                     top: `${obs.top}%`,
                   }}
                 >
-                  ðï¸
+                  🏛️
                 </div>
               ))}
             </div>
 
             <div className="flex gap-4 justify-center">
               <Button onClick={moveUp} size="lg" className="text-2xl px-12 py-8">
-                â¬ï¸ Up
+                ⬆️ Up
               </Button>
               <Button onClick={moveDown} size="lg" className="text-2xl px-12 py-8">
-                â¬ï¸ Down
+                ⬇️ Down
               </Button>
             </div>
           </>
         ) : (
           <div className="text-center">
-            <div className="text-8xl mb-4">ð¥</div>
+            <div className="text-8xl mb-4">💥</div>
             <h2 className="text-5xl font-bold text-purple-600 mb-4">Game Over!</h2>
             <p className="text-3xl text-muted-foreground mb-6">Final Score: {score}</p>
             <Button onClick={resetGame} size="lg" className="text-2xl px-12 py-8">
@@ -123,7 +123,7 @@ const MagicCarpet = () => {
         {score >= 200 && !gameOver && (
           <div className="mt-6 text-center">
             <h3 className="text-4xl font-bold text-purple-600">
-              ð Master Flyer! ð
+              🏆 Master Flyer! 🏆
             </h3>
           </div>
         )}
