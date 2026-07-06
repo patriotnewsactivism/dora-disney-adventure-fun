@@ -11,11 +11,15 @@ const ProfileSelect = () => {
   const { setCurrentProfile } = useProfile();
 
   // Fixed profiles for the kids
+  // NOTE: these ids must match real UUID rows in the Supabase `profiles`
+  // table (conversation_messages / game_progress / video_calls all foreign
+  // key to profiles.id). If you ever recreate the Supabase project, reseed
+  // these 4 rows and update the ids here to match.
   const profiles = [
-    { id: "emme", name: "Emme", age: 11, avatar_url: elsaImg },
-    { id: "anna-claire", name: "Anna-Claire", age: 8, avatar_url: annaImg },
-    { id: "mckenna", name: "Mckenna", age: 5, avatar_url: arielImg },
-    { id: "ethan", name: "Ethan", age: 3, avatar_url: mickeyImg },
+    { id: "3eb09cb1-b8c9-4535-bdc7-5a50d4581f84", name: "Emme", age: 11, avatar_url: elsaImg },
+    { id: "e64510ec-7866-4d97-bd31-686f9b2572b6", name: "Anna-Claire", age: 8, avatar_url: annaImg },
+    { id: "cee13cc5-c7c4-401c-b92a-755ff1a0c880", name: "Mckenna", age: 5, avatar_url: arielImg },
+    { id: "7edfd863-963a-4a25-9421-10e5ddbd3b70", name: "Ethan", age: 3, avatar_url: mickeyImg },
   ];
 
   const handleProfileSelect = (profile: any) => {

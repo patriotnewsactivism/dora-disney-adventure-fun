@@ -167,6 +167,22 @@ const ParentDashboard = () => {
     setGateDraft((prev) => (prev.length >= 4 ? [index] : [...prev, index]));
   };
 
+  const resetGateCode = async () => {
+    setSavingGate(true);
+    const { error } = await supabase
+      .from('app_config')
+      .update({ family_code: [], updated_at: new Date().toISOString() })
+      .eq('id', 1);
+    setSavingGate(false);
+    if (error) {
+      toast({ title: 'Could not reset', description: error.message, variant: 'destructive' });
+      return;
+    }
+    setGateCode([]);
+    setGateDraft([]);
+    toast({ title: 'Password reset!', description: 'Kids will pick a new one next time they open the app.' });
+  };
+
   const saveGateCode = async () => {
     if (gateDraft.length < 2) {
       toast({ title: 'Pick at least 2 pictures', variant: 'destructive' });
@@ -389,8 +405,11 @@ const ParentDashboard = () => {
             <Card className="p-6">
               <h2 className="text-2xl font-bold mb-2">Kids' Magic Password</h2>
               <p className="text-muted-foreground mb-4">
-                This is the picture sequence your kids tap to get into the app on any device. Current password is {gateCode.length} picture{gateCode.length === 1 ? '' : 's'} long.
-                Tap a new sequence below (2–4 pictures) and save to change it everywhere.
+                This is the picture sequence your kids tap to get into the app on any device.{' '}
+                {gateCode.length === 0
+                  ? "No password is set right now — the kids will be asked to pick one themselves next time they open the app."
+                  : `Current password is ${gateCode.length} picture${gateCode.length === 1 ? '' : 's'} long.`}
+                {' '}You can also tap a new sequence below (2–4 pictures) and save to set it yourself.
               </p>
 
               <div className="flex gap-2 mb-4">
@@ -416,7 +435,7 @@ const ParentDashboard = () => {
                 ))}
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
                 <Button onClick={saveGateCode} disabled={savingGate || gateDraft.length < 2} className="gap-2">
                   <Check className="h-4 w-4" /> {savingGate ? 'Saving...' : 'Save New Password'}
                 </Button>
@@ -425,7 +444,13 @@ const ParentDashboard = () => {
                     Clear
                   </Button>
                 )}
+                <Button variant="destructive" onClick={resetGateCode} disabled={savingGate}>
+                  Forgot it? Reset & let kids pick a new one
+                </Button>
               </div>
+              <p className="text-sm text-muted-foreground mt-3">
+                Resetting clears the current password. Next time the app opens on any device, the kids will be walked through picking a brand new one themselves.
+              </p>
             </Card>
           </TabsContent>
         </Tabs>
